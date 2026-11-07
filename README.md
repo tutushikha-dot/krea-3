@@ -1,53 +1,52 @@
-# Krea 3 (krea.ai/krea-3) — Authentic 1:1 Production Website Mirror
+# Krea 3 — Authentic Interactive Hero Section (100% Non-Minified)
 
-A complete, authentic 1:1 mirror of the official **[Krea 3](https://www.krea.ai/krea-3)** website, with all production layouts, SvelteKit application bundles, SuisseIntl typography, interactive components, and high-resolution assets.
+A 100% non-minified, authentic implementation of the **[Krea 3](https://www.krea.ai/krea-3)** interactive hero section.
 
-Designed for direct integration with **Magic Patterns**, **Claude Code**, GitHub Actions, and web agents.
+Designed with clean, human-readable semantic HTML, CSS, and vanilla ES6 JavaScript with complete developer control.
 
-## 🚀 Live Demo & Links
-- **Live Website (GitHub Pages)**: [https://tutushikha-dot.github.io/krea-3/](https://tutushikha-dot.github.io/krea-3/)
+## 🚀 Live Demo Links
+- **Live GitHub Pages URL**: [https://tutushikha-dot.github.io/krea-3/](https://tutushikha-dot.github.io/krea-3/)
+- **Local Wi-Fi Server**: `http://192.168.0.146:8008/`
 - **GitHub Repository**: [https://github.com/tutushikha-dot/krea-3](https://github.com/tutushikha-dot/krea-3)
 
 ---
 
-## 📦 Repository Structure
+## 📦 Architecture & Codebase
 
 ```
-├── index.html         # Authentic Krea 3 production HTML (483 KB)
-├── _app/              # SvelteKit production runtime, chunks & stylesheets
-│   └── b6d71630aea537f6/
-│       └── immutable/
-│           ├── assets/    # Production CSS stylesheets (0.DUZ0V3xd.css, etc.)
-│           ├── chunks/    # Component chunks (Hero, Benchmarks, PluginDock, etc.)
-│           └── entry/     # SvelteKit hydration & app entry points
-├── fonts/             # Complete SuisseIntl font family (.woff2) & fonts.css
-├── assets/            # Authentic high-resolution WebP hero media & edit layers
-├── plugins/           # Creative plugin dock icons (PS, AE, PR, Blender, etc.)
-├── icons/             # UI vector icon assets
+├── index.html         # 100% clean, semantic Hero section HTML
+├── css/
+│   └── hero.css       # 100% unminified, documented master styles & animations
+├── js/
+│   └── hero.js        # 100% unminified vanilla JS engine with exact coordinate math
+├── fonts/             # Authentic Suisse Intl font family (.woff2) & fonts.css
+├── assets/            # Authentic high-resolution WebP hero bases & edit layers
+├── icons/             # Platform SVG vector assets
 ├── favicon/           # Platform & browser favicons
-└── .nojekyll          # Directs GitHub Pages to serve _app/ without Jekyll filtering
+└── .nojekyll          # GitHub Pages static serving configuration
 ```
 
 ---
 
-## 🎨 Key Sections & Architecture
+## ⚡ Features & Capabilities
 
-1. **Interactive Hero Prompt Editor**:
-   - Dynamic prompt pill targeting with precise bounding coordinates and multi-subject layering (`windcoat`, `crew`, `sardine`, `billboard`).
-2. **Speed & Latency Benchmarks**:
-   - Curved latency speedometer gauge comparing generation speeds against leading models.
-3. **Infinite Marquee**:
-   - Production marquee component featuring partner studios and creative enterprises.
-4. **Before / After Comparison Sliders**:
-   - High-fidelity visual split comparisons with interactive position tracking.
-5. **Creative Tools Plugin Dock**:
-   - Interactive macOS-inspired magnification dock housing creative application integrations (Adobe Photoshop, Illustrator, Premiere Pro, After Effects, DaVinci Resolve, Blender, ChatGPT).
-6. **Feature Matrix & FAQ**:
-   - Expandable accordions, technical specifications, and tier breakdowns.
-
----
-
-## 🛠️ Integration with Magic Patterns & AI Agents
-
-- **Magic Patterns**: Connect this repository directly using `https://github.com/tutushikha-dot/krea-3` (Magic Patterns will read all original components, styles, and assets) or supply the live URL `https://tutushikha-dot.github.io/krea-3/`.
-- **Claude Code**: Clone or reference this repository directly to inspect production CSS rules, Svelte component structures, and asset layouts.
+1. **Exact 2736 × 1536 Canvas Coordinates**:
+   - Matches the official Krea 3 coordinate engine (`box` and `layer` percentage positions).
+2. **Interactive Bounding Boxes (`.k3r-box`)**:
+   - Corner resize handles (`.k3r-handle.ne`, `.sw`, `.se`) with spring scaling.
+   - Animated SVG trace stroke around active selection.
+   - Number pins (`.k3r-label`).
+3. **Glassmorphic Prompt Note Pills (`.k3r-note`)**:
+   - Ultra-clean backdrop blur (`backdrop-filter: blur(40px) saturate(160%)`).
+   - Pill badge status (`✓ Under 8s`).
+   - Dynamic top/below placement based on bounding box Y-axis clearance.
+4. **SVG Cutout Dimming Mask (`#k3-dim-holes`)**:
+   - Dims the surrounding scene with `rgba(0, 0, 0, 0.32)` while cutting out sharp rectangular holes for active subjects.
+5. **Multi-Subject Switcher**:
+   - Includes full coordinate sets and authentic assets for:
+     - **Sardines** (Overhead Lisboa tiles, bread, lemon to lime, green label)
+     - **Windcoat** (Fashion editorial with dove, sunglasses, coat)
+     - **Skate Crew** (Urban sidewalk candid with dino and ghost graphics)
+     - **Billboard** (Sunset highway advertisement swap)
+6. **Authentic Typography**:
+   - Uses real **Suisse Intl** fonts directly linked from the `./fonts/` directory.
