@@ -1,12 +1,10 @@
-# Krea 3 — Authentic Interactive Hero Section (100% Non-Minified)
+# Krea 3 — Authentic Speed & Performance Comparison Section (100% Non-Minified)
 
-A 100% non-minified, authentic implementation of the **[Krea 3](https://www.krea.ai/krea-3)** interactive hero section.
-
-Designed with clean, human-readable semantic HTML, CSS, and vanilla ES6 JavaScript with complete developer control.
+A 100% non-minified, authentic implementation of the **[Krea 3](https://www.krea.ai/krea-3)** speed comparison component with rolling mechanical counters, semicircular speedometer gauge, and segmented tab switcher.
 
 ## 🚀 Live Demo Links
-- **Live GitHub Pages URL**: [https://tutushikha-dot.github.io/krea-3/](https://tutushikha-dot.github.io/krea-3/)
 - **Local Wi-Fi Server**: `http://192.168.0.146:8008/`
+- **Live GitHub Pages URL**: [https://tutushikha-dot.github.io/krea-3/](https://tutushikha-dot.github.io/krea-3/)
 - **GitHub Repository**: [https://github.com/tutushikha-dot/krea-3](https://github.com/tutushikha-dot/krea-3)
 
 ---
@@ -14,39 +12,36 @@ Designed with clean, human-readable semantic HTML, CSS, and vanilla ES6 JavaScri
 ## 📦 Architecture & Codebase
 
 ```
-├── index.html         # 100% clean, semantic Hero section HTML
+├── index.html              # 100% semantic HTML for the speed comparison section
 ├── css/
-│   └── hero.css       # 100% unminified, documented master styles & animations
+│   └── performance.css     # 100% unminified, documented styles, keyframes & container queries
 ├── js/
-│   └── hero.js        # 100% unminified vanilla JS engine with exact coordinate math
-├── fonts/             # Authentic Suisse Intl font family (.woff2) & fonts.css
-├── assets/            # Authentic high-resolution WebP hero bases & edit layers
-├── icons/             # Platform SVG vector assets
-├── favicon/           # Platform & browser favicons
-└── .nojekyll          # GitHub Pages static serving configuration
+│   └── performance.js      # 100% unminified vanilla JS engine driving the rolling counter & gauge
+├── fonts/                  # Authentic Suisse Intl font family (.woff2) & fonts.css
+├── icons/                  # Platform SVG vector assets
+├── favicon/                # Platform & browser favicons
+└── .nojekyll               # GitHub Pages static serving configuration
 ```
 
 ---
 
-## ⚡ Features & Capabilities
+## ⚡ Features & Micro-Interactions
 
-1. **Exact 2736 × 1536 Canvas Coordinates**:
-   - Matches the official Krea 3 coordinate engine (`box` and `layer` percentage positions).
-2. **Interactive Bounding Boxes (`.k3r-box`)**:
-   - Corner resize handles (`.k3r-handle.ne`, `.sw`, `.se`) with spring scaling.
-   - Animated SVG trace stroke around active selection.
-   - Number pins (`.k3r-label`).
-3. **Glassmorphic Prompt Note Pills (`.k3r-note`)**:
-   - Ultra-clean backdrop blur (`backdrop-filter: blur(40px) saturate(160%)`).
-   - Pill badge status (`✓ Under 8s`).
-   - Dynamic top/below placement based on bounding box Y-axis clearance.
-4. **SVG Cutout Dimming Mask (`#k3-dim-holes`)**:
-   - Dims the surrounding scene with `rgba(0, 0, 0, 0.32)` while cutting out sharp rectangular holes for active subjects.
-5. **Multi-Subject Switcher**:
-   - Includes full coordinate sets and authentic assets for:
-     - **Sardines** (Overhead Lisboa tiles, bread, lemon to lime, green label)
-     - **Windcoat** (Fashion editorial with dove, sunglasses, coat)
-     - **Skate Crew** (Urban sidewalk candid with dino and ghost graphics)
-     - **Billboard** (Sunset highway advertisement swap)
-6. **Authentic Typography**:
-   - Uses real **Suisse Intl** fonts directly linked from the `./fonts/` directory.
+1. **Rolling Mechanical Number Counter (`.roll`)**:
+   - Implements Krea's vertical sliding counter with gradient mask edges.
+   - Dual-layer rolling animation with motion blur clearance (`filter: blur(10px)` to `blur(0px)`).
+   - Rhythmic staggered transition delay (0ms on `"Faster,"`, 90ms on `"Cheaper"`).
+   - Width auto-calculation avoiding word jitter during number shifts.
+
+2. **Authentic Semicircular Speedometer Gauge**:
+   - `viewBox="0 0 1381 692"` with 53 precision-placed dots and 9 radial tick lines.
+   - Dynamically highlights active dot arcs and tick lines based on speed ratio (`faster / 24`).
+
+3. **Segmented "Compared to" Tab Switcher**:
+   - Sliding white pill indicator with spring physics (`cubic-bezier(0.34, 1.3, 0.64, 1)`).
+   - **GPT Image 2** (OpenAI icon): displays `10× Faster, 3× Cheaper`.
+   - **Nano Banana Pro** (Banana emoji 🍌): displays `4× Faster, 2× Cheaper`.
+
+4. **Floating Bottom Navigation Dock & Top Header**:
+   - Header with Krea SVG logo, "Technical report", and "Contact sales" pill buttons.
+   - Frosted glassmorphic bottom dock with "Capabilities", "Use Cases", "Performance" [active], "Benchmarks", and vibrant blue "Try Krea 3" CTA.
