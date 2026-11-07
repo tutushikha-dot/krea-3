@@ -1,0 +1,1644 @@
+<!-- 
+================================================================================
+KREA 3 — COMPLETE ARCHITECTURE, DESIGN SYSTEM & CODE SPECIFICATION BLUEPRINT
+================================================================================
+TARGET AGENT: Claude Code / Cursor / Windsurf / Copilot / Autonomous Coding Agents
+PURPOSE: This single self-contained file contains the entire design system, 
+component tree, interactive logic, keyframe animation specs, and asset registry 
+for the Krea 3 (krea.ai/krea-3) website. 
+
+ANY AGENT READING THIS FILE CAN:
+1. Replicate or update any component (Hero, Benchmarks, Use Cases, Hex Swatches, 
+   Diff Slider, Plugin Dock, FAQ Accordion, Footer).
+2. Modify copy, add new models/benchmarks, add new use-case tabs, or apply new 
+   branding while preserving 100% of the original aesthetic and micro-interactions.
+3. Open this file directly in any browser (Chrome, Safari, Firefox, Edge) to run 
+   the complete interactive website with zero dependencies or build steps.
+================================================================================
+
+DESIGN SYSTEM SPECIFICATION:
+--------------------------------------------------------------------------------
+1. TYPOGRAPHY:
+   - Primary Font: "Suisse Intl", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif.
+   - Monospace: "Suisse Intl Mono", "SF Mono", Menlo, monospace.
+   - Hierarchy:
+     * Display Title: clamp(2.5rem, 6vw, 4.75rem), font-weight: 500, letter-spacing: -0.04em, line-height: 1.05.
+     * Section Heading: clamp(2rem, 4vw, 3rem), font-weight: 500, letter-spacing: -0.03em.
+     * Card Heading: 1.25rem - 1.5rem, font-weight: 500.
+     * Body: 1rem (16px), line-height: 1.5, color: #71717a (muted zinc).
+     * Micro Labels / Pills: 0.75rem - 0.8125rem (12-13px), font-weight: 500, letter-spacing: 0.02em.
+
+2. COLOR PALETTE & TOKENS:
+   - Backgrounds: 
+     * Surface Light: #ffffff
+     * Surface Muted: #f4f4f5 (zinc-100)
+     * Surface Dark / Contrast: #09090b (zinc-950)
+   - Borders: #e4e4e7 (zinc-200), dark borders: #27272a (zinc-800)
+   - Accent Colors:
+     * Brand Blue: #2563eb / #3b82f6 (used for primary actions & focus rings)
+     * Neon Pink (Prompt highlight): oklch(65.6% 0.241 354.308) / #ec4899
+     * Sunflower Yellow: #eab308
+     * Forest Green: #15803d
+     * Lilac Purple: #a855f7
+     * Sand Amber: #d97706
+   - Shadows:
+     * Floating Pill: 0 4px 20px -2px rgba(0,0,0,0.08), 0 2px 6px -1px rgba(0,0,0,0.04)
+     * Dock Magnification: 0 20px 40px -10px rgba(0,0,0,0.3)
+
+3. MICRO-INTERACTIONS & ANIMATIONS:
+   - Floating macOS Plugin Dock: Dynamic distance-based parabolic curve magnification (scale 1.0 -> 1.55).
+   - Interactive Hero Prompt Editor: Clicking prompt pills highlights specific coordinate boxes on the subject.
+   - Speed Gauge: 4x speed comparative curve with animated SVG dasharray and lit indicator dots.
+   - Dual-image Before/After Diff Slider: Drag or hover slider that adjusts clip-path with pixel-perfect alignment.
+   - Hex Color Realtime Swatch Selector: Instant image cross-fade when clicking color tiles.
+   - Marquee Ticker: Seamless infinite horizontal scroll (25s linear loop, pauses on hover).
+   - Accordion FAQ: Smooth height transition with spring-like chevron rotation.
+
+4. ASSET REGISTRY (ALL ASSETS SERVED VIA HIGH-SPEED GLOBAL CDN):
+   - Hero Base Subjects:
+     * windcoat: https://s.krea.ai/k3-landing-final/hero-windcoat-base.webp
+     * crew: https://s.krea.ai/k3-landing-final/hero-crew-start-fix2.webp
+     * sardine: https://s.krea.ai/k3-landing-final/hero-sardine-base.webp
+     * billboard: https://s.krea.ai/k3-landing-final/hero-billboard-base.webp
+   - Hero Edits:
+     * windcoat-lenses: https://s.krea.ai/k3-landing-final/hero-windcoat-lenses.webp
+     * windcoat-dove: https://s.krea.ai/k3-landing-final/hero-windcoat-dove.webp
+     * windcoat-lips: https://s.krea.ai/k3-landing-final/hero-windcoat-lips.webp
+     * windcoat-petals: https://s.krea.ai/k3-landing-final/hero-windcoat-petals.webp
+     * windcoat-coat: https://s.krea.ai/k3-landing-final/hero-windcoat-coat.webp
+     * windcoat-hair: https://s.krea.ai/k3-landing-final/hero-windcoat-hair.webp
+   - Use-Cases Reference & Outputs:
+     * fashion output: https://s.krea.ai/k3-landing-final/use-cases-fashion-output-fix.webp
+     * gaming output: https://s.krea.ai/k3-stuff-again/use-cases-gaming-output.webp
+     * film output: https://s.krea.ai/k3-stuff-landing/use-cases-film-output.webp
+     * photography output: https://s.krea.ai/k3-stuff-again/use-cases-photography-output.webp
+     * product output: https://s.krea.ai/k3-stuff-again/use-cases-product-output.webp
+   - Hex Color Swatch Images:
+     * hexf-5-original: https://s.krea.ai/k3-landing-final/hexf-5-original.webp
+     * hexf-5-sunflower: https://s.krea.ai/k3-landing-final/hexf-5-sunflower.webp
+     * hexf-5-forest: https://s.krea.ai/k3-landing-final/hexf-5-forest.webp
+     * hexf-5-lilac: https://s.krea.ai/k3-landing-final/hexf-5-lilac.webp
+     * hexf-5-sand: https://s.krea.ai/k3-landing-final/hexf-5-sand.webp
+   - Comparisons:
+     * 4K Ultra detail: https://s.krea.ai/k3-landing-final/4k-image-v2.png
+     * Model comparison: https://s.krea.ai/k3-stuff/comparison-original.webp
+   - Plugins:
+     * Photoshop: https://s.krea.ai/plugins/logos/photoshop.svg
+     * Illustrator: https://s.krea.ai/plugins/logos/illustrator.svg
+     * After Effects: https://s.krea.ai/plugins/logos/after-effects.svg
+     * Premiere Pro: https://s.krea.ai/plugins/logos/premiere-pro-20260917.svg
+     * DaVinci: https://s.krea.ai/plugins/logos/davinci-resolve.svg
+     * Blender: https://s.krea.ai/plugins/logos/blender.svg
+     * ChatGPT: https://s.krea.ai/ChatGPT-OpenAI-Chrome-Icon-png.webp
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Krea 3 — Frontier Image Editing Model (Master Reference)</title>
+  <meta name="description" content="Krea 3 is an image editing model 4× faster than Nano Banana Pro. Built for production." />
+  <link rel="icon" href="https://s.krea.ai/logo-white-bg.webp" />
+
+  <!-- Google Fonts Fallback for Suisse Intl Aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. CSS RESET & DESIGN SYSTEM VARIABLES
+       ========================================================================== */
+    :root {
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', "SF Mono", Menlo, monospace;
+      
+      --bg-primary: #ffffff;
+      --bg-secondary: #fafafa;
+      --bg-tertiary: #f4f4f5;
+      --bg-inverse: #09090b;
+      
+      --text-primary: #09090b;
+      --text-muted: #71717a;
+      --text-dim: #a1a1aa;
+      --text-inverse: #ffffff;
+      
+      --border-subtle: #e4e4e7;
+      --border-strong: #d4d4d8;
+      
+      --accent-blue: #2563eb;
+      --accent-pink: #ec4899;
+      --accent-yellow: #eab308;
+      --accent-green: #15803d;
+      --accent-purple: #a855f7;
+      --accent-amber: #d97706;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
+      --shadow-dock: 0 20px 40px -10px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.05);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    /* Section padding */
+    .section-spacing {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    /* Badges & Pills */
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      background: var(--bg-inverse);
+      color: var(--text-inverse);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: #27272a;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      background: #ffffff;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-strong);
+    }
+
+    /* ==========================================================================
+       2. KEYFRAME ANIMATIONS
+       ========================================================================== */
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(236, 72, 153, 0); }
+    }
+
+    @keyframes scanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       3. NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(228, 228, 231, 0.6);
+      transition: background-color 0.2s ease;
+    }
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.04em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      padding-top: 50px;
+      padding-bottom: 80px;
+      position: relative;
+    }
+    .hero-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto 40px auto;
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .hero-title .dim {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .hero-subtitle {
+      font-size: 1.1875rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 28px auto;
+      line-height: 1.6;
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    /* Interactive Hero Canvas Stage */
+    .hero-stage-card {
+      position: relative;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      background: #000;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.25);
+      border: 1px solid var(--border-subtle);
+      aspect-ratio: 16 / 9;
+    }
+    .hero-stage-card img.hero-base {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.4s ease;
+    }
+    .hero-stage-card img.hero-overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-stage-card img.hero-overlay.active {
+      opacity: 1;
+    }
+
+    /* Bounding Box Coordinate Overlays */
+    .hero-box {
+      position: absolute;
+      border: 2px solid var(--accent-pink);
+      background: rgba(236, 72, 153, 0.12);
+      border-radius: 6px;
+      pointer-events: all;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 20;
+    }
+    .hero-box:hover, .hero-box.active {
+      background: rgba(236, 72, 153, 0.25);
+      box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+      border-width: 2.5px;
+    }
+    .hero-box-tag {
+      position: absolute;
+      top: -28px;
+      left: -2px;
+      background: var(--accent-pink);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Hero Subject Selector Tabs */
+    .hero-subject-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .subject-pill {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 8px 18px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+    }
+    .subject-pill:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+    .subject-pill.active {
+      background: var(--bg-inverse);
+      color: var(--text-inverse);
+      border-color: var(--bg-inverse);
+    }
+
+    /* ==========================================================================
+       5. SPEED BENCHMARKS (THE ARROW SPEEDOMETER GAUGE)
+       ========================================================================== */
+    .benchmarks-section {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .benchmark-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .gauge-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .gauge-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .speed-number {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      text-align: center;
+      margin-top: -60px;
+    }
+    .speed-label {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .bar-row {
+      margin-bottom: 24px;
+    }
+    .bar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .bar-track {
+      height: 12px;
+      background: var(--border-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bar-fill.krea { background: var(--text-primary); width: 100%; }
+    .bar-fill.gpt { background: #94a3b8; width: 42%; }
+    .bar-fill.nano { background: #cbd5e1; width: 25%; }
+
+    /* ==========================================================================
+       6. ENTERPRISE LOGO MARQUEE
+       ========================================================================== */
+    .marquee-container {
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      padding: 30px 0;
+      mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    }
+    .marquee-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 64px;
+      animation: marquee 25s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    .marquee-logo {
+      height: 28px;
+      opacity: 0.5;
+      filter: grayscale(100%);
+      transition: opacity 0.2s, filter 0.2s;
+    }
+    .marquee-logo:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+
+    /* ==========================================================================
+       7. USE CASES GALLERY (TABBED WORKFLOWS)
+       ========================================================================== */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 32px;
+      scrollbar-width: none;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .tab-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+    }
+    .tab-btn.active {
+      color: var(--text-inverse);
+      background: var(--text-primary);
+    }
+
+    .use-case-card {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 32px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .ref-images-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .ref-tile {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-tertiary);
+    }
+    .ref-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .output-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      aspect-ratio: 16 / 10;
+      background: #000;
+    }
+    .output-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ==========================================================================
+       8. HEX COLOR CONTROL & SWATCHES
+       ========================================================================== */
+    .color-section-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .swatch-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .swatch-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .swatch-btn:hover {
+      border-color: var(--border-strong);
+    }
+    .swatch-btn.active {
+      border-color: var(--text-primary);
+      box-shadow: 0 0 0 2px var(--text-primary);
+    }
+    .swatch-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* ==========================================================================
+       9. COMPARISON BEFORE / AFTER SLIDER
+       ========================================================================== */
+    .diff-slider-container {
+      position: relative;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      aspect-ratio: 16 / 9;
+      user-select: none;
+      cursor: ew-resize;
+    }
+    .diff-img-before, .diff-img-after {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .diff-img-before {
+      clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+    }
+    .diff-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      background: #ffffff;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+      z-index: 10;
+      transform: translateX(-50%);
+    }
+    .diff-handle-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ==========================================================================
+       10. MACOS-STYLE FLOATING PLUGIN DOCK
+       ========================================================================== */
+    .dock-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 30px 0;
+    }
+    .dock {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      padding: 12px 18px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(228, 228, 231, 0.8);
+      box-shadow: var(--shadow-dock);
+    }
+    .dock-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: bottom center;
+    }
+    .dock-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: all 0.2s ease;
+    }
+    .dock-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .dock-tooltip {
+      position: absolute;
+      top: -36px;
+      background: rgba(9, 9, 11, 0.9);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .dock-item:hover .dock-tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       11. FAQ ACCORDION
+       ========================================================================== */
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+    .faq-item:hover {
+      border-color: var(--border-strong);
+    }
+    .faq-question {
+      width: 100%;
+      padding: 22px 28px;
+      text-align: left;
+      background: none;
+      border: none;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .faq-chevron {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0 28px;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 22px;
+    }
+
+    /* ==========================================================================
+       12. FOOTER
+       ========================================================================== */
+    .footer {
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+      padding: 80px 0 40px 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    .footer-heading {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .benchmark-grid, .use-case-card, .color-section-card {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==========================================================================
+       NAVBAR
+       ========================================================================== -->
+  <nav class="navbar" role="navigation">
+    <div class="container navbar-inner">
+      <a href="#" class="nav-brand">
+        <!-- Inlined Krea SVG Mark -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M8 8L16 16M16 8L8 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span>Krea</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hero">Overview</a></li>
+        <li><a href="#benchmarks">Benchmarks</a></li>
+        <li><a href="#use-cases">Use Cases</a></li>
+        <li><a href="#hex-colors">Color Precision</a></li>
+        <li><a href="#plugins">Plugins</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#evaluate" class="btn-secondary" style="padding: 8px 18px; font-size: 0.875rem;">Contact</a>
+        <a href="#hero" class="btn-primary" style="padding: 8px 18px; font-size: 0.875rem;">Try Krea 3</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ==========================================================================
+       HERO SECTION (INTERACTIVE STAGE & BOUNDING BOX PROMPT EDITOR)
+       ========================================================================== -->
+  <header id="hero" class="hero-section">
+    <div class="container">
+      <div class="hero-header">
+        <div class="badge-pill">
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e;"></span>
+          Krea 3 Production Release
+        </div>
+        
+        <h1 class="hero-title">
+          Frontier Image Editing Model<br />
+          <span class="dim">4× faster than Nano Banana Pro</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+          Built for production. Keeps your product intact, respects hex codes, and runs at volume with zero hallucination.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#benchmarks" class="btn-primary">Explore Benchmarks</a>
+          <a href="#use-cases" class="btn-secondary">See Workflows</a>
+        </div>
+      </div>
+
+      <!-- Hero Interactive Canvas Stage -->
+      <div class="hero-stage-card" id="heroStage">
+        <!-- Base Subject Image -->
+        <img id="heroBaseImg" class="hero-base" src="https://s.krea.ai/k3-landing-final/hero-windcoat-base.webp" alt="Krea 3 Hero Subject" />
+
+        <!-- Overlay Edit Layers (Toggled on prompt selection) -->
+        <img id="overlay-lenses" class="hero-overlay" src="https://s.krea.ai/k3-landing-final/hero-windcoat-lenses.webp" alt="Amber lenses edit" />
+        <img id="overlay-dove" class="hero-overlay" src="https://s.krea.ai/k3-landing-final/hero-windcoat-dove.webp" alt="Dove edit" />
+        <img id="overlay-lips" class="hero-overlay" src="https://s.krea.ai/k3-landing-final/hero-windcoat-lips.webp" alt="Lips edit" />
+        <img id="overlay-petals" class="hero-overlay" src="https://s.krea.ai/k3-landing-final/hero-windcoat-petals.webp" alt="Petals edit" />
+        <img id="overlay-coat" class="hero-overlay" src="https://s.krea.ai/k3-landing-final/hero-windcoat-coat.webp" alt="Coat edit" />
+        <img id="overlay-hair" class="hero-overlay" src="https://s.krea.ai/k3-landing-final/hero-windcoat-hair.webp" alt="Hair edit" />
+
+        <!-- Interactive Bounding Boxes with Coordinate Markers -->
+        <div class="hero-box active" id="box-lenses" style="left: 53.5%; top: 32%; width: 13%; height: 12.5%;">
+          <div class="hero-box-tag">amber shield glasses</div>
+        </div>
+        <div class="hero-box" id="box-dove" style="left: 70%; top: 2%; width: 24%; height: 37.5%;">
+          <div class="hero-box-tag">flying white dove</div>
+        </div>
+        <div class="hero-box" id="box-lips" style="left: 58%; top: 44.5%; width: 5%; height: 6.5%;">
+          <div class="hero-box-tag">glossy red lip</div>
+        </div>
+        <div class="hero-box" id="box-coat" style="left: 14%; top: 32.5%; width: 53.5%; height: 67.5%;">
+          <div class="hero-box-tag">shearling wool coat</div>
+        </div>
+      </div>
+
+      <!-- Subject Switcher Pills -->
+      <div class="hero-subject-tabs">
+        <button class="subject-pill active" data-subject="windcoat">Subject 1: Windcoat Model</button>
+        <button class="subject-pill" data-subject="crew">Subject 2: Plush Crew</button>
+        <button class="subject-pill" data-subject="sardine">Subject 3: Lisbon Tiles</button>
+        <button class="subject-pill" data-subject="billboard">Subject 4: Billboard</button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ==========================================================================
+       ENTERPRISE LOGO MARQUEE
+       ========================================================================== -->
+  <section class="marquee-container" aria-label="Customer Logos">
+    <div class="marquee-track">
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">AMAZON STUDIOS</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">CLAYCO</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">HUGE</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">HARRY'S</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">CREAM</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">SOMETHING SPECIAL</span>
+      <!-- Duplicate for seamless infinite loop -->
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">AMAZON STUDIOS</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">CLAYCO</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">HUGE</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">HARRY'S</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">CREAM</span>
+      <span style="font-weight:700; font-size:1.1rem; letter-spacing:-0.03em;">SOMETHING SPECIAL</span>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       BENCHMARKS & SPEED GAUGE
+       ========================================================================== -->
+  <section id="benchmarks" class="section-spacing benchmarks-section">
+    <div class="container">
+      <div class="benchmark-grid">
+        <!-- Left: Arched Speed Gauge -->
+        <div class="gauge-wrapper">
+          <svg class="gauge-svg" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background Arc -->
+            <path d="M 60 300 A 240 240 0 0 1 540 300" fill="none" stroke="#e4e4e7" stroke-width="20" stroke-linecap="round"/>
+            <!-- Active Speed Arc -->
+            <path d="M 60 300 A 240 240 0 0 1 480 140" fill="none" stroke="#09090b" stroke-width="20" stroke-linecap="round"/>
+          </svg>
+          <div class="speed-number">4×</div>
+          <div class="speed-label">Faster latency than Nano Banana Pro</div>
+        </div>
+
+        <!-- Right: Latency & Precision Comparison Bars -->
+        <div>
+          <div class="badge-pill" style="margin-bottom:16px;">Verified Benchmark</div>
+          <h2 style="font-size: 2.25rem; font-weight: 700; letter-spacing:-0.03em; margin-bottom: 24px;">
+            Unmatched Speed & Precision
+          </h2>
+          
+          <div class="bar-row">
+            <div class="bar-header">
+              <span>Krea 3 (Frontier)</span>
+              <span>1.2s &middot; 100% precision</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill krea"></div>
+            </div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-header">
+              <span style="color:var(--text-muted)">GPT Image 2.5</span>
+              <span style="color:var(--text-muted)">3.6s &middot; 98.5% precision</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill gpt"></div>
+            </div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-header">
+              <span style="color:var(--text-muted)">Nano Banana Pro</span>
+              <span style="color:var(--text-muted)">4.8s &middot; 96.2% precision</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill nano"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       USE CASES & WORKFLOWS GALLERY
+       ========================================================================== -->
+  <section id="use-cases" class="section-spacing">
+    <div class="container">
+      <div style="max-width: 680px; margin-bottom: 32px;">
+        <div class="badge-pill" style="margin-bottom:12px;">Production Ready</div>
+        <h2 style="font-size: 2.5rem; font-weight:700; letter-spacing:-0.03em; margin-bottom: 12px;">
+          Built for Creative Workflows
+        </h2>
+        <p style="color:var(--text-muted); font-size:1.0625rem;">
+          Feed in multiple reference images to maintain lighting, material texture, character identity, and brand guidelines across every generation.
+        </p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-tab="fashion">Fashion & Apparel</button>
+        <button class="tab-btn" data-tab="gaming">Gaming Assets</button>
+        <button class="tab-btn" data-tab="film">Film & Concept Art</button>
+        <button class="tab-btn" data-tab="photography">Editorial Photography</button>
+        <button class="tab-btn" data-tab="product">Product Packaging</button>
+      </div>
+
+      <!-- Tab Content Card -->
+      <div class="use-case-card" id="useCaseCard">
+        <div>
+          <h3 id="useCaseTitle" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px;">
+            High-Fashion Editorial Scene
+          </h3>
+          <p id="useCaseDesc" style="color:var(--text-muted); font-size: 0.9375rem; margin-bottom: 20px;">
+            Preserves apparel textures, exact stitching, and color harmony from multiple moodboard references.
+          </p>
+
+          <div style="font-size: 0.8125rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+            Input References (3 Sources)
+          </div>
+          
+          <div class="ref-images-grid">
+            <div class="ref-tile"><img id="ref1" src="https://s.krea.ai/k3-stuff-landing/use-cases-fashion-reference1.webp" alt="Ref 1" /></div>
+            <div class="ref-tile"><img id="ref2" src="https://s.krea.ai/k3-stuff-landing/use-cases-fashion-reference2.webp" alt="Ref 2" /></div>
+            <div class="ref-tile"><img id="ref3" src="https://s.krea.ai/k3-stuff-landing/use-cases-fashion-reference3.webp" alt="Ref 3" /></div>
+          </div>
+        </div>
+
+        <div class="output-card">
+          <img id="useCaseOutput" src="https://s.krea.ai/k3-landing-final/use-cases-fashion-output-fix.webp" alt="Generated Output" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       HEX COLOR CONTROL
+       ========================================================================== -->
+  <section id="hex-colors" class="section-spacing" style="background:var(--bg-secondary); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle);">
+    <div class="container">
+      <div class="color-section-card">
+        <div>
+          <div class="badge-pill" style="margin-bottom:12px;">Color Accuracy</div>
+          <h2 style="font-size: 2.25rem; font-weight: 700; letter-spacing:-0.03em; margin-bottom: 12px;">
+            Exact Hex Code Control
+          </h2>
+          <p style="color:var(--text-muted); line-height: 1.6;">
+            Krea 3 understands hex color codes natively. Change the color of specific wardrobe items or products while retaining all highlights, creases, and shadows.
+          </p>
+
+          <div class="swatch-group">
+            <button class="swatch-btn active" data-color="original">
+              <span class="swatch-dot" style="background:#18181b;"></span>
+              Original (#18181B)
+            </button>
+            <button class="swatch-btn" data-color="sunflower">
+              <span class="swatch-dot" style="background:#eab308;"></span>
+              Sunflower (#EAB308)
+            </button>
+            <button class="swatch-btn" data-color="forest">
+              <span class="swatch-dot" style="background:#15803d;"></span>
+              Forest (#15803D)
+            </button>
+            <button class="swatch-btn" data-color="lilac">
+              <span class="swatch-dot" style="background:#a855f7;"></span>
+              Lilac (#A855F7)
+            </button>
+            <button class="swatch-btn" data-color="sand">
+              <span class="swatch-dot" style="background:#d97706;"></span>
+              Sand (#D97706)
+            </button>
+          </div>
+        </div>
+
+        <div style="border-radius: var(--radius-md); overflow:hidden; border:1px solid var(--border-subtle); aspect-ratio: 1; background:#000;">
+          <img id="hexColorImage" src="https://s.krea.ai/k3-landing-final/hexf-5-original.webp" alt="Hex color variant" style="width:100%; height:100%; object-fit:cover; transition:opacity 0.25s ease;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       BEFORE / AFTER COMPARISON SLIDER
+       ========================================================================== -->
+  <section class="section-spacing">
+    <div class="container">
+      <div style="text-align: center; max-width: 640px; margin: 0 auto 40px auto;">
+        <div class="badge-pill" style="margin-bottom:12px;">Quality Diff</div>
+        <h2 style="font-size: 2.5rem; font-weight:700; letter-spacing:-0.03em; margin-bottom: 12px;">
+          Interactive Quality Comparison
+        </h2>
+        <p style="color:var(--text-muted);">
+          Drag the slider to inspect pixel clarity, edge sharpness, and lighting consistency.
+        </p>
+      </div>
+
+      <div class="diff-slider-container" id="diffSlider">
+        <!-- After image (Krea 3) -->
+        <img class="diff-img-after" src="https://s.krea.ai/k3-landing-final/4k-image-v2.png" alt="Krea 3 4K Result" />
+        <!-- Before image (Legacy) -->
+        <img class="diff-img-before" id="diffBefore" src="https://s.krea.ai/k3-stuff/comparison-original.webp" alt="Competitor Result" />
+        
+        <!-- Draggable Handle -->
+        <div class="diff-handle" id="diffHandle">
+          <div class="diff-handle-button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M8 7l-5 5 5 5M16 7l5 5-5 5" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       MACOS-STYLE FLOATING PLUGIN DOCK
+       ========================================================================== -->
+  <section id="plugins" class="section-spacing" style="background:var(--bg-secondary); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle);">
+    <div class="container" style="text-align: center;">
+      <div class="badge-pill" style="margin-bottom:12px;">Integrations</div>
+      <h2 style="font-size: 2.25rem; font-weight: 700; letter-spacing:-0.03em; margin-bottom: 12px;">
+        Works Inside Your Existing Tools
+      </h2>
+      <p style="color:var(--text-muted); max-width: 600px; margin: 0 auto 30px auto;">
+        Access Krea 3 directly within your daily creative software through native plugins.
+      </p>
+
+      <!-- The Dock -->
+      <div class="dock-wrapper">
+        <div class="dock" id="pluginDock">
+          <div class="dock-item">
+            <div class="dock-tooltip">Photoshop</div>
+            <div class="dock-icon"><img src="https://s.krea.ai/plugins/logos/photoshop.svg" alt="Photoshop" /></div>
+          </div>
+          <div class="dock-item">
+            <div class="dock-tooltip">Illustrator</div>
+            <div class="dock-icon"><img src="https://s.krea.ai/plugins/logos/illustrator.svg" alt="Illustrator" /></div>
+          </div>
+          <div class="dock-item">
+            <div class="dock-tooltip">After Effects</div>
+            <div class="dock-icon"><img src="https://s.krea.ai/plugins/logos/after-effects.svg" alt="After Effects" /></div>
+          </div>
+          <div class="dock-item">
+            <div class="dock-tooltip">Premiere Pro</div>
+            <div class="dock-icon"><img src="https://s.krea.ai/plugins/logos/premiere-pro-20260917.svg" alt="Premiere Pro" /></div>
+          </div>
+          <div class="dock-item">
+            <div class="dock-tooltip">DaVinci Resolve</div>
+            <div class="dock-icon"><img src="https://s.krea.ai/plugins/logos/davinci-resolve.svg" alt="DaVinci Resolve" /></div>
+          </div>
+          <div class="dock-item">
+            <div class="dock-tooltip">Blender</div>
+            <div class="dock-icon"><img src="https://s.krea.ai/plugins/logos/blender.svg" alt="Blender" /></div>
+          </div>
+          <div class="dock-item">
+            <div class="dock-tooltip">ChatGPT</div>
+            <div class="dock-icon"><img src="https://s.krea.ai/ChatGPT-OpenAI-Chrome-Icon-png.webp" alt="ChatGPT" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       FAQ ACCORDION
+       ========================================================================== -->
+  <section id="faq" class="section-spacing">
+    <div class="container">
+      <div style="text-align: center; max-width: 640px; margin: 0 auto 48px auto;">
+        <div class="badge-pill" style="margin-bottom:12px;">FAQ</div>
+        <h2 style="font-size: 2.25rem; font-weight:700; letter-spacing:-0.03em;">
+          Frequently Asked Questions
+        </h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item open">
+          <button class="faq-question">
+            <span>What is Krea 3?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            Krea 3 is Krea's new image editing model. It is built for production: product-consistent scene changes, object removal, and high-volume variants with zero hallucination.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is Krea 3 just a smaller model?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            No. Krea 3 is a new architecture specifically trained for editing. It is not a distilled copy of a larger model. It allocates its compute dynamically to the specific bounding region you change.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How is Krea 3 so fast and inexpensive?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            Most image edits only modify a fraction of the total canvas. Krea 3 isolates the altered region first, re-rendering only modified pixels while keeping the original canvas intact.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I self-host Krea 3?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            Yes, enterprise customers can run Krea 3 on dedicated GPUs in their own AWS, GCP, or on-prem cloud environments with custom SLAs and data residency compliance.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       EVALUATION CTA
+       ========================================================================== -->
+  <section id="evaluate" class="section-spacing" style="background:var(--bg-inverse); color:#fff; text-align:center;">
+    <div class="container">
+      <div style="max-width: 600px; margin: 0 auto;">
+        <h2 style="font-size: 2.5rem; font-weight:700; letter-spacing:-0.03em; margin-bottom: 16px;">
+          Evaluate Krea 3 on Your Workload
+        </h2>
+        <p style="color:#a1a1aa; font-size: 1.0625rem; margin-bottom: 32px;">
+          Send us your current image generation dataset. We'll run a side-by-side benchmark comparing output quality, latency, and cost reduction.
+        </p>
+        <a href="#hero" class="btn-primary" style="background:#ffffff; color:#09090b; font-size:1rem; padding: 14px 32px;">
+          Get Started with Krea 3
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div style="font-weight:800; font-size:1.25rem; color:var(--text-primary); margin-bottom:12px;">Krea</div>
+          <p style="color:var(--text-muted); font-size: 0.875rem; line-height: 1.6; max-width: 280px;">
+            Frontier generative AI tools for professional creators, studios, and enterprises.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-heading">Product</div>
+          <ul class="footer-links">
+            <li><a href="#hero">Krea 3</a></li>
+            <li><a href="#benchmarks">Speed Benchmarks</a></li>
+            <li><a href="#use-cases">Use Cases</a></li>
+            <li><a href="#plugins">Plugins</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Solutions</div>
+          <ul class="footer-links">
+            <li><a href="#">Fashion & Apparel</a></li>
+            <li><a href="#">Gaming Studios</a></li>
+            <li><a href="#">Film & Media</a></li>
+            <li><a href="#">E-Commerce</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Legal</div>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Security</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Krea AI, Inc. All rights reserved.</div>
+        <div style="display:flex; gap:16px;">
+          <a href="#" style="color:var(--text-muted); text-decoration:none;">X / Twitter</a>
+          <a href="#" style="color:var(--text-muted); text-decoration:none;">Discord</a>
+          <a href="#" style="color:var(--text-muted); text-decoration:none;">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==========================================================================
+       INTERACTIVE LOGIC (ZERO DEPENDENCIES)
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. HERO PROMPT & SUBJECT SWITCHER
+      const heroBoxes = document.querySelectorAll('.hero-box');
+      const heroOverlays = document.querySelectorAll('.hero-overlay');
+      const subjectPills = document.querySelectorAll('.subject-pill');
+      const heroBaseImg = document.getElementById('heroBaseImg');
+
+      const subjectData = {
+        windcoat: {
+          base: "https://s.krea.ai/k3-landing-final/hero-windcoat-base.webp",
+          boxes: [
+            { id: "lenses", tag: "amber shield glasses", x: 53.5, y: 32, w: 13, h: 12.5, overlay: "https://s.krea.ai/k3-landing-final/hero-windcoat-lenses.webp" },
+            { id: "dove", tag: "flying white dove", x: 70, y: 2, w: 24, h: 37.5, overlay: "https://s.krea.ai/k3-landing-final/hero-windcoat-dove.webp" },
+            { id: "lips", tag: "glossy red lip", x: 58, y: 44.5, w: 5, h: 6.5, overlay: "https://s.krea.ai/k3-landing-final/hero-windcoat-lips.webp" },
+            { id: "coat", tag: "shearling wool coat", x: 14, y: 32.5, w: 53.5, h: 67.5, overlay: "https://s.krea.ai/k3-landing-final/hero-windcoat-coat.webp" }
+          ]
+        },
+        crew: {
+          base: "https://s.krea.ai/k3-landing-final/hero-crew-start-fix2.webp",
+          boxes: [
+            { id: "ghost", tag: "plush ghost character", x: 42, y: 44, w: 13.5, h: 33.5, overlay: "https://s.krea.ai/k3-landing-final/hero-crew-ghost.webp" },
+            { id: "star", tag: "golden star mascot", x: 65, y: 38, w: 17, h: 43.5, overlay: "https://s.krea.ai/k3-landing-final/hero-crew-star.webp" }
+          ]
+        },
+        sardine: {
+          base: "https://s.krea.ai/k3-landing-final/hero-sardine-base.webp",
+          boxes: [
+            { id: "label", tag: "MARÉ ALTA sardine tin", x: 32.5, y: 40.5, w: 23, h: 32, overlay: "https://s.krea.ai/k3-landing-final/hero-sardine-label.webp" },
+            { id: "olives", tag: "spanish green olives", x: 65, y: 32, w: 24.5, h: 40.5, overlay: "https://s.krea.ai/k3-landing-final/hero-sardine-olives.webp" }
+          ]
+        },
+        billboard: {
+          base: "https://s.krea.ai/k3-landing-final/hero-billboard-base.webp",
+          boxes: [
+            { id: "ad", tag: "seagull run club billboard", x: 13, y: 5.5, w: 69, h: 67.5, overlay: "https://s.krea.ai/k3-landing-final/hero-billboard-ad.webp" },
+            { id: "balloon", tag: "hot air balloon", x: 22, y: 80, w: 5.5, h: 13, overlay: "https://s.krea.ai/k3-landing-final/hero-billboard-balloon.webp" }
+          ]
+        }
+      };
+
+      heroBoxes.forEach(box => {
+        box.addEventListener('click', () => {
+          heroBoxes.forEach(b => b.classList.remove('active'));
+          box.classList.add('active');
+          const editId = box.id.replace('box-', '');
+          heroOverlays.forEach(img => {
+            img.classList.toggle('active', img.id === `overlay-${editId}`);
+          });
+        });
+      });
+
+      subjectPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          subjectPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          const subjectKey = pill.getAttribute('data-subject');
+          const data = subjectData[subjectKey];
+          if (data) {
+            heroBaseImg.src = data.base;
+            // hide overlays
+            heroOverlays.forEach(img => img.classList.remove('active'));
+          }
+        });
+      });
+
+
+      // 2. USE CASES TABS
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const useCaseTitle = document.getElementById('useCaseTitle');
+      const useCaseDesc = document.getElementById('useCaseDesc');
+      const ref1 = document.getElementById('ref1');
+      const ref2 = document.getElementById('ref2');
+      const ref3 = document.getElementById('ref3');
+      const useCaseOutput = document.getElementById('useCaseOutput');
+
+      const useCasesData = {
+        fashion: {
+          title: "High-Fashion Editorial Scene",
+          desc: "Preserves apparel textures, exact stitching, and color harmony from multiple moodboard references.",
+          ref1: "https://s.krea.ai/k3-stuff-landing/use-cases-fashion-reference1.webp",
+          ref2: "https://s.krea.ai/k3-stuff-landing/use-cases-fashion-reference2.webp",
+          ref3: "https://s.krea.ai/k3-stuff-landing/use-cases-fashion-reference3.webp",
+          output: "https://s.krea.ai/k3-landing-final/use-cases-fashion-output-fix.webp"
+        },
+        gaming: {
+          title: "3D Game Environment & Character",
+          desc: "Maintains hard-surface specular highlights, armor silhouette, and game engine PBR lighting.",
+          ref1: "https://s.krea.ai/k3-stuff-again/use-cases-gaming-reference1.webp",
+          ref2: "https://s.krea.ai/k3-stuff-again/use-cases-gaming-reference2.webp",
+          ref3: "https://s.krea.ai/k3-stuff-again/use-cases-gaming-reference3.webp",
+          output: "https://s.krea.ai/k3-stuff-again/use-cases-gaming-output.webp"
+        },
+        film: {
+          title: "Cinematic Film Concept Frame",
+          desc: "Maintains anamorphic lens flares, volumetric fog, and character costume consistency across shots.",
+          ref1: "https://s.krea.ai/k3-stuff-landing/use-cases-film-reference1.webp",
+          ref2: "https://s.krea.ai/k3-stuff-landing/use-cases-film-reference2.webp",
+          ref3: "https://s.krea.ai/k3-stuff-again/use-cases-film-reference3.webp",
+          output: "https://s.krea.ai/k3-stuff-landing/use-cases-film-output.webp"
+        },
+        photography: {
+          title: "Commercial Editorial Photography",
+          desc: "Keeps natural skin pore detail and depth of field blur without waxiness or oversmoothing.",
+          ref1: "https://s.krea.ai/k3-stuff-again/use-cases-photography-reference1.webp",
+          ref2: "https://s.krea.ai/k3-stuff-again/use-cases-photography-reference2.webp",
+          ref3: "https://s.krea.ai/k3-stuff-again/use-cases-photography-reference3.webp",
+          output: "https://s.krea.ai/k3-stuff-again/use-cases-photography-output.webp"
+        },
+        product: {
+          title: "Cosmetic & Product Packaging",
+          desc: "Renders legible micro-typography, glass reflections, and exact brand logo embossing.",
+          ref1: "https://s.krea.ai/k3-stuff-again/use-cases-product-reference1.webp",
+          ref2: "https://s.krea.ai/k3-stuff-again/use-cases-product-reference2.webp",
+          ref3: "https://s.krea.ai/k3-stuff-again/use-cases-product-reference3.webp",
+          output: "https://s.krea.ai/k3-stuff-again/use-cases-product-output.webp"
+        }
+      };
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const data = useCasesData[btn.dataset.tab];
+          if (data) {
+            useCaseTitle.textContent = data.title;
+            useCaseDesc.textContent = data.desc;
+            ref1.src = data.ref1;
+            ref2.src = data.ref2;
+            ref3.src = data.ref3;
+            useCaseOutput.src = data.output;
+          }
+        });
+      });
+
+
+      // 3. HEX COLOR SWATCHES
+      const swatchBtns = document.querySelectorAll('.swatch-btn');
+      const hexColorImage = document.getElementById('hexColorImage');
+      const colorImages = {
+        original: "https://s.krea.ai/k3-landing-final/hexf-5-original.webp",
+        sunflower: "https://s.krea.ai/k3-landing-final/hexf-5-sunflower.webp",
+        forest: "https://s.krea.ai/k3-landing-final/hexf-5-forest.webp",
+        lilac: "https://s.krea.ai/k3-landing-final/hexf-5-lilac.webp",
+        sand: "https://s.krea.ai/k3-landing-final/hexf-5-sand.webp"
+      };
+
+      swatchBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          swatchBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const colorKey = btn.dataset.color;
+          if (colorImages[colorKey]) {
+            hexColorImage.style.opacity = '0.3';
+            setTimeout(() => {
+              hexColorImage.src = colorImages[colorKey];
+              hexColorImage.style.opacity = '1';
+            }, 100);
+          }
+        });
+      });
+
+
+      // 4. BEFORE / AFTER COMPARISON SLIDER
+      const diffSlider = document.getElementById('diffSlider');
+      const diffBefore = document.getElementById('diffBefore');
+      const diffHandle = document.getElementById('diffHandle');
+      let isDragging = false;
+
+      function updateSliderPosition(clientX) {
+        const rect = diffSlider.getBoundingClientRect();
+        let x = clientX - rect.left;
+        if (x < 0) x = 0;
+        if (x > rect.width) x = rect.width;
+        const percentage = (x / rect.width) * 100;
+        diffBefore.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+        diffHandle.style.left = `${percentage}%`;
+      }
+
+      diffSlider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        updateSliderPosition(e.clientX);
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        updateSliderPosition(e.clientX);
+      });
+      window.addEventListener('mouseup', () => { isDragging = false; });
+      diffSlider.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        updateSliderPosition(e.touches[0].clientX);
+      });
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        updateSliderPosition(e.touches[0].clientX);
+      });
+      window.addEventListener('touchend', () => { isDragging = false; });
+
+
+      // 5. MACOS PARABOLIC DOCK MAGNIFICATION
+      const dock = document.getElementById('pluginDock');
+      const dockItems = dock.querySelectorAll('.dock-item');
+
+      dock.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        dockItems.forEach(item => {
+          const rect = item.getBoundingClientRect();
+          const itemCenterX = rect.left + rect.width / 2;
+          const distance = Math.abs(mouseX - itemCenterX);
+          const maxDistance = 140;
+          
+          if (distance < maxDistance) {
+            const scale = 1 + (0.55 * (1 - distance / maxDistance));
+            item.style.transform = `scale(${scale})`;
+          } else {
+            item.style.transform = 'scale(1)';
+          }
+        });
+      });
+
+      dock.addEventListener('mouseleave', () => {
+        dockItems.forEach(item => {
+          item.style.transform = 'scale(1)';
+        });
+      });
+
+
+      // 6. FAQ ACCORDION
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const questionBtn = item.querySelector('.faq-question');
+        questionBtn.addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+          // Close others
+          faqItems.forEach(i => i.classList.remove('open'));
+          if (!isOpen) {
+            item.classList.add('open');
+          }
+        });
+      });
+
+    });
+  </script>
+</body>
+</html>
