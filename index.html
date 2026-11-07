@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Krea 3 — Faster, Cheaper Performance</title>
-	<meta name="description" content="Krea 3 Performance Benchmarks. 10× / 4× Faster, 3× / 2× Cheaper than leading models. Authentic unminified component." />
+	<title>Krea 3 — Frontier Image Editing Model</title>
+	<meta name="description" content="Krea 3 — 10× / 4× Faster, 3× / 2× Cheaper than leading models. Interactive image editing hero and performance benchmarks." />
 	
 	<!-- Favicons -->
 	<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32.png" />
@@ -17,13 +17,14 @@
 	<link rel="preload" href="./fonts/SuisseIntl-Bold-WebM.woff2" as="font" type="font/woff2" crossorigin />
 	<link rel="stylesheet" href="./fonts/fonts.css" />
 	
-	<!-- 100% Unminified Authentic Performance Stylesheet -->
+	<!-- 100% Unminified Authentic Stylesheets -->
 	<link rel="stylesheet" href="./css/performance.css" />
+	<link rel="stylesheet" href="./css/hero.css" />
 </head>
 <body>
 
-	<!-- Top Navigation Header -->
-	<header class="top-header" aria-label="Main navigation">
+	<!-- Top Navigation Header (Fixed, adapts seamlessly between light & dark sections) -->
+	<header class="top-header" id="top-header" aria-label="Main navigation">
 		<!-- Krea Logo -->
 		<a href="/" class="brand-logo-link" aria-label="Krea Home">
 			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -41,7 +42,9 @@
 		</div>
 	</header>
 
-	<!-- Main Performance Speedometer & Headline Section -->
+	<!-- =========================================================================
+	     SECTION 1: Performance Speedometer & Benchmark Comparison
+	     ========================================================================= -->
 	<main class="headline-section" id="performance-section" aria-label="Speed and cost performance comparison">
 		<div class="gauge-container">
 			
@@ -176,19 +179,142 @@
 		</div>
 	</main>
 
-	<!-- Floating Bottom Navigation Dock -->
-	<nav class="floating-dock" aria-label="Section navigation">
+	<!-- =========================================================================
+	     SECTION 2: Authentic Hero Section (Interactive Image Editor)
+	     ========================================================================= -->
+	<section class="hero-edit" id="hero-section" aria-labelledby="hero-title">
+		<div class="viewport">
+			<div class="stage" id="hero-stage">
+				
+				<!-- Scene & Base Image Canvas -->
+				<div class="scene" id="hero-scene">
+					<img id="hero-base-image" class="base-image" src="./assets/s.krea.ai/k3-landing-final/hero-sardine-base.webp" alt="Portuguese sardine still life on azulejo tiles" draggable="false" />
+				</div>
+
+				<!-- SVG Cutout Mask (Dims unselected regions) -->
+				<svg class="holes dimmed" id="holes-svg" aria-hidden="true" width="100%" height="100%">
+					<defs>
+						<mask id="k3-dim-holes">
+							<rect width="100%" height="100%" fill="white"></rect>
+							<g id="mask-holes-group">
+								<!-- Dynamically inserted black cutout rectangles -->
+							</g>
+						</mask>
+					</defs>
+					<rect width="100%" height="100%" mask="url(#k3-dim-holes)"></rect>
+				</svg>
+
+				<!-- Edit Overlay Layers (Cross-faded layers) -->
+				<div id="hero-layers"></div>
+
+				<!-- Interactive Bounding Boxes -->
+				<div id="hero-boxes"></div>
+
+				<!-- Glassmorphic Prompt Pills -->
+				<div id="hero-notes"></div>
+
+			</div>
+
+			<!-- Soft Dark Ambient Scrim -->
+			<div class="scrim" aria-hidden="true"></div>
+		</div>
+
+		<!-- Subject Switcher Dock (Select between authentic subjects) -->
+		<nav class="subject-switcher" aria-label="Scene selector">
+			<button type="button" class="subject-btn active" data-subject="sardine">Sardines</button>
+			<button type="button" class="subject-btn" data-subject="windcoat">Windcoat</button>
+			<button type="button" class="subject-btn" data-subject="crew">Skate Crew</button>
+			<button type="button" class="subject-btn" data-subject="billboard">Billboard</button>
+		</nav>
+
+		<!-- Bottom Left Copy & Headings -->
+		<div class="copy">
+			<div class="copy-text">
+				<div class="hero-word">Krea 3</div>
+				<h1 id="hero-title" class="title">
+					Frontier Image Editing Model<br />
+					<span class="dim">4× faster than Nano Banana Pro</span>
+				</h1>
+			</div>
+
+			<!-- Call-to-Action Buttons -->
+			<div class="ctas">
+				<a href="#try" class="cta-primary">Try Krea 3</a>
+				<a href="#explore" class="cta-secondary">See what it can do</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- =========================================================================
+	     Floating Bottom Navigation Dock
+	     ========================================================================= -->
+	<nav class="floating-dock" id="floating-dock" aria-label="Section navigation">
 		<div class="dock-tabs">
+			<a href="#performance-section" class="dock-tab active" data-target="performance-section">Performance</a>
+			<a href="#hero-section" class="dock-tab" data-target="hero-section">Hero Editor</a>
 			<a href="#capabilities" class="dock-tab">Capabilities</a>
-			<a href="#use-cases" class="dock-tab">Use Cases</a>
-			<a href="#performance" class="dock-tab active">Performance</a>
 			<a href="#benchmarks" class="dock-tab">Benchmarks</a>
 		</div>
 		<a href="#try" class="dock-cta-btn">Try Krea 3</a>
 	</nav>
 
-	<!-- 100% Non-Minified Vanilla Interaction Engine -->
+	<!-- 100% Non-Minified Vanilla Interaction Engines -->
 	<script src="./js/performance.js"></script>
+	<script src="./js/hero.js"></script>
+
+	<!-- Section Transition Observer (Adapts header and dock styling seamlessly) -->
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const topHeader = document.getElementById('top-header');
+			const floatingDock = document.getElementById('floating-dock');
+			const heroSection = document.getElementById('hero-section');
+			const dockTabs = document.querySelectorAll('.dock-tab');
+
+			// IntersectionObserver to detect when Hero section is visible
+			if ('IntersectionObserver' in window && heroSection) {
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						// When hero section is in view, switch header & dock to dark mode
+						if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
+							topHeader.classList.add('in-hero');
+							floatingDock.classList.add('in-hero');
+							updateActiveDockTab('hero-section');
+						} else {
+							topHeader.classList.remove('in-hero');
+							floatingDock.classList.remove('in-hero');
+							updateActiveDockTab('performance-section');
+						}
+					});
+				}, { threshold: [0.1, 0.35, 0.6] });
+
+				observer.observe(heroSection);
+			}
+
+			function updateActiveDockTab(targetId) {
+				dockTabs.forEach(tab => {
+					if (tab.getAttribute('data-target') === targetId) {
+						tab.classList.add('active');
+					} else if (tab.hasAttribute('data-target')) {
+						tab.classList.remove('active');
+					}
+				});
+			}
+
+			// Smooth scroll navigation clicks
+			dockTabs.forEach(tab => {
+				tab.addEventListener('click', (e) => {
+					const targetId = tab.getAttribute('data-target');
+					if (targetId) {
+						const el = document.getElementById(targetId);
+						if (el) {
+							e.preventDefault();
+							el.scrollIntoView({ behavior: 'smooth' });
+						}
+					}
+				});
+			});
+		});
+	</script>
 
 </body>
 </html>

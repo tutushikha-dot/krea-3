@@ -37,10 +37,12 @@ html, body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	overflow-x: hidden;
+	overflow-y: auto;
+	scroll-behavior: smooth;
 }
 
 /* ==========================================================================
-   Top Navigation Header
+   Top Navigation Header (Adaptive for Light & Dark sections)
    ========================================================================== */
 
 .top-header {
@@ -53,8 +55,9 @@ html, body {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	z-index: 40;
+	z-index: 50;
 	pointer-events: none;
+	transition: background-color 0.3s;
 }
 
 .brand-logo-link {
@@ -63,11 +66,16 @@ html, body {
 	place-items: center;
 	color: #000000;
 	text-decoration: none;
-	transition: transform 0.15s ease-out;
+	transition: color 0.3s, transform 0.15s ease-out;
 }
 
 .brand-logo-link:active {
 	transform: scale(0.95);
+}
+
+.top-header.in-hero .brand-logo-link {
+	color: #ffffff;
+	mix-blend-mode: difference;
 }
 
 .header-actions {
@@ -90,7 +98,7 @@ html, body {
 	border-radius: 9999px;
 	text-decoration: none;
 	white-space: nowrap;
-	transition: background-color 0.2s, border-color 0.2s, transform 0.15s ease-out;
+	transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.15s ease-out;
 }
 
 .btn-report:hover {
@@ -100,6 +108,18 @@ html, body {
 
 .btn-report:active {
 	transform: scale(0.95);
+}
+
+.top-header.in-hero .btn-report {
+	color: #ffffff;
+	background-color: rgba(255, 255, 255, 0.14);
+	border-color: rgba(255, 255, 255, 0.22);
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
+}
+
+.top-header.in-hero .btn-report:hover {
+	background-color: rgba(255, 255, 255, 0.24);
 }
 
 .btn-contact {
@@ -114,7 +134,7 @@ html, body {
 	border-radius: 9999px;
 	text-decoration: none;
 	white-space: nowrap;
-	transition: opacity 0.2s, transform 0.15s ease-out;
+	transition: background-color 0.2s, color 0.2s, opacity 0.2s, transform 0.15s ease-out;
 }
 
 .btn-contact:hover {
@@ -123,6 +143,11 @@ html, body {
 
 .btn-contact:active {
 	transform: scale(0.95);
+}
+
+.top-header.in-hero .btn-contact {
+	color: #000000;
+	background-color: #ffffff;
 }
 
 /* ==========================================================================
@@ -139,6 +164,7 @@ html, body {
 	justify-content: center;
 	padding: 100px 20px 140px;
 	overflow: hidden;
+	background-color: #ffffff;
 }
 
 /* Gauge Container with Aspect Ratio and Container Queries */
@@ -424,12 +450,33 @@ html, body {
 	align-items: center;
 	gap: 8px;
 	padding: 6px;
-	background: rgba(245, 245, 247, 0.82);
+	background: rgba(245, 245, 247, 0.85);
 	-webkit-backdrop-filter: blur(24px) saturate(180%);
 	backdrop-filter: blur(24px) saturate(180%);
 	border: 0.5px solid rgba(0, 0, 0, 0.08);
 	border-radius: 9999px;
 	box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.18);
+	transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.floating-dock.in-hero {
+	background: rgba(24, 24, 27, 0.85);
+	border-color: rgba(255, 255, 255, 0.15);
+	box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.6);
+}
+
+.floating-dock.in-hero .dock-tab {
+	color: #a1a1aa;
+}
+
+.floating-dock.in-hero .dock-tab:hover {
+	color: #ffffff;
+}
+
+.floating-dock.in-hero .dock-tab.active {
+	background: rgba(255, 255, 255, 0.18);
+	color: #ffffff;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 
 .dock-tabs {
