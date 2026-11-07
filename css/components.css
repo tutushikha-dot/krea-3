@@ -1,0 +1,771 @@
+/* ==========================================================================
+   Krea 3 — Design System Components (100% Non-Minified & Authentic)
+   Typography: Suisse Intl (Official Font Family)
+   Dependencies: css/tokens.css
+   ========================================================================== */
+
+@import url('./tokens.css');
+
+/* --------------------------------------------------------------------------
+   0. Global Micro-Interactions & Utilities
+   -------------------------------------------------------------------------- */
+
+.active-scale-95 {
+	transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.active-scale-95:active {
+	transform: scale(0.95) !important;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   1. Button System (.k3-btn)
+   -------------------------------------------------------------------------- */
+
+.k3-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-family: var(--font-display);
+	font-weight: var(--font-medium);
+	line-height: 1;
+	border-radius: var(--radius-full);
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	white-space: nowrap;
+	user-select: none;
+	-webkit-user-select: none;
+	transition: background-color var(--duration-normal) var(--ease-out),
+	            color var(--duration-normal) var(--ease-out),
+	            border-color var(--duration-normal) var(--ease-out),
+	            box-shadow var(--duration-normal) var(--ease-out),
+	            opacity var(--duration-normal) var(--ease-out),
+	            transform var(--duration-fast) var(--ease-out);
+}
+
+.k3-btn:active {
+	transform: scale(0.95);
+}
+
+.k3-btn:disabled,
+.k3-btn[aria-disabled="true"] {
+	opacity: 0.45;
+	pointer-events: none;
+	cursor: not-allowed;
+}
+
+/* Sizes */
+.k3-btn-sm {
+	height: 36px;
+	padding: 0 16px;
+	font-size: var(--text-sm);
+}
+
+.k3-btn-md {
+	height: 44px;
+	padding: 0 20px;
+	font-size: var(--text-btn);
+}
+
+.k3-btn-lg {
+	height: 52px;
+	padding: 0 28px;
+	font-size: 16px;
+}
+
+/* Variants */
+/* Primary Solid Pill (White on dark canvas / Black on light canvas) */
+.k3-btn-primary {
+	color: #000000;
+	background-color: #ffffff;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.k3-btn-primary:hover {
+	opacity: 0.9;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+/* Secondary Translucent Glass Pill */
+.k3-btn-secondary {
+	color: #ffffff;
+	background-color: rgba(255, 255, 255, 0.16);
+	-webkit-backdrop-filter: blur(16px) saturate(170%);
+	backdrop-filter: blur(16px) saturate(170%);
+	box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.3);
+}
+
+.k3-btn-secondary:hover {
+	background-color: rgba(255, 255, 255, 0.24);
+	box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.45);
+}
+
+/* Outlined Clean Pill */
+.k3-btn-outline {
+	color: var(--text-primary);
+	background-color: var(--bg-primary);
+	border: 1px solid var(--border-medium);
+	box-shadow: var(--shadow-subtle);
+}
+
+.k3-btn-outline:hover {
+	background-color: var(--bg-secondary);
+	border-color: var(--color-gray-400);
+}
+
+/* Brand Blue Pill CTA */
+.k3-btn-brand {
+	color: #ffffff;
+	background-color: var(--color-brand-blue);
+	box-shadow: var(--shadow-glow-blue);
+}
+
+.k3-btn-brand:hover {
+	background-color: var(--color-brand-blue-hover);
+	box-shadow: 0 10px 28px -4px rgba(37, 99, 235, 0.6);
+}
+
+/* Compare Chip ("Hold to compare") */
+.k3-btn-chip {
+	height: 38px;
+	padding: 0 18px;
+	font-size: var(--text-sm);
+	color: #ffffff;
+	background: rgba(18, 18, 20, 0.72);
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
+	border: 0.5px solid rgba(255, 255, 255, 0.18);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.k3-btn-chip:hover {
+	background: rgba(30, 30, 34, 0.85);
+	border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Circular Icon Button */
+.k3-btn-icon {
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border-radius: var(--radius-full);
+	display: inline-grid;
+	place-items: center;
+}
+
+.k3-btn-icon.k3-btn-sm {
+	width: 36px;
+	height: 36px;
+}
+
+.k3-btn-icon.k3-btn-lg {
+	width: 52px;
+	height: 52px;
+}
+
+/* --------------------------------------------------------------------------
+   2. SVG Icon Suite (.k3-icon)
+   -------------------------------------------------------------------------- */
+
+.k3-icon {
+	display: inline-block;
+	vertical-align: middle;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2.25;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	flex-shrink: 0;
+	transition: transform var(--duration-fast) var(--ease-out);
+}
+
+/* Standardized Icon Dimensions */
+.size-3 { width: 12px; height: 12px; }
+.size-3-5 { width: 14px; height: 14px; }
+.size-4 { width: 16px; height: 16px; }
+.size-5 { width: 20px; height: 20px; }
+.size-6 { width: 24px; height: 24px; }
+.size-7 { width: 28px; height: 28px; }
+
+/* Spinning Loader Icon */
+.k3-icon-spin {
+	animation: k3-spin 1s linear infinite;
+}
+
+@keyframes k3-spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   3. Segmented Toggle & Radio Groups (.k3-toggle-group)
+   -------------------------------------------------------------------------- */
+
+.k3-toggle-group {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	padding: 5px;
+	background: var(--bg-secondary);
+	border: 0.5px solid var(--border-light);
+	border-radius: var(--radius-full);
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+[data-theme="dark"] .k3-toggle-group {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Sliding Indicator Pill */
+.k3-toggle-pill {
+	position: absolute;
+	top: 5px;
+	bottom: 5px;
+	left: 5px;
+	width: calc((100% - 10px) / var(--total-items, 2));
+	background: #ffffff;
+	border-radius: var(--radius-full);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+	transform: translateX(calc(100% * var(--i, 0)));
+	transition: transform 0.32s var(--ease-spring);
+	pointer-events: none;
+	z-index: 1;
+}
+
+[data-theme="dark"] .k3-toggle-pill {
+	background: #ffffff;
+}
+
+.k3-toggle-btn {
+	position: relative;
+	z-index: 2;
+	flex: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	height: 38px;
+	padding: 0 18px;
+	font-family: var(--font-display);
+	font-size: var(--text-btn);
+	font-weight: var(--font-medium);
+	color: var(--text-secondary);
+	background: transparent;
+	border: none;
+	border-radius: var(--radius-full);
+	cursor: pointer;
+	white-space: nowrap;
+	transition: color 0.2s var(--ease-out);
+}
+
+.k3-toggle-btn:hover {
+	color: var(--text-primary);
+}
+
+.k3-toggle-btn.active,
+.k3-toggle-btn[aria-checked="true"] {
+	color: #000000 !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Comment Badges, Pins & Bounding Boxes (.k3r-*)
+   -------------------------------------------------------------------------- */
+
+/* Bounding Box Container */
+.k3r-box {
+	position: absolute;
+	outline: 1.5px solid rgba(255, 255, 255, 0.95);
+	background: rgba(255, 255, 255, 0.04);
+	border-radius: var(--radius-md);
+	box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.2), 0 8px 26px -8px rgba(0, 0, 0, 0.6);
+	transition: background-color var(--duration-normal) var(--ease-out),
+	            box-shadow var(--duration-normal) var(--ease-out);
+	animation: k3r-box-in 0.5s var(--ease-spring-snappy) backwards;
+}
+
+.k3r-box.k3r-sel {
+	outline-width: 2px;
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), var(--shadow-glow-box);
+}
+
+@keyframes k3r-box-in {
+	from {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Teardrop Number Badge Pin (Pin 1, 2, 3...) */
+.k3r-label {
+	position: absolute;
+	top: -11px;
+	left: -11px;
+	z-index: 5;
+	display: grid;
+	place-items: center;
+	min-width: 22px;
+	height: 22px;
+	padding: 0 6px;
+	font-family: var(--font-display);
+	font-size: var(--text-badge);
+	font-weight: var(--font-medium);
+	line-height: 1;
+	color: #ffffff;
+	background: var(--region-color, var(--color-blue));
+	border-radius: var(--radius-teardrop);
+	box-shadow: 0 0 0 1.5px #ffffff, 0 3px 10px -2px rgba(0, 0, 0, 0.55);
+	pointer-events: none;
+}
+
+/* 4-Corner Bounding Box Handles */
+.k3r-handle {
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	pointer-events: none;
+}
+
+.k3r-handle::after {
+	content: "";
+	position: absolute;
+	inset: 6px;
+	background: rgba(0, 0, 0, 0.75);
+	border: 2px solid #ffffff;
+	border-radius: var(--radius-xs);
+	transition: transform 0.3s var(--ease-spring-snappy);
+}
+
+.k3r-handle.nw { top: -13px; left: -13px; }
+.k3r-handle.ne { top: -13px; right: -13px; }
+.k3r-handle.sw { bottom: -13px; left: -13px; }
+.k3r-handle.se { bottom: -13px; right: -13px; }
+
+.k3r-box:hover .k3r-handle::after {
+	transform: scale(1.15);
+}
+
+/* Glassmorphic Prompt Note Pill */
+.k3r-note {
+	position: absolute;
+	z-index: 6;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	height: 40px;
+	padding: 0 14px 0 9px;
+	font-family: var(--font-display);
+	font-size: var(--text-btn);
+	font-weight: var(--font-medium);
+	line-height: 1;
+	color: #111111;
+	background: var(--glass-note-bg);
+	-webkit-backdrop-filter: var(--glass-note-blur);
+	backdrop-filter: var(--glass-note-blur);
+	border: 0.5px solid var(--glass-note-border);
+	border-radius: var(--radius-prompt-note);
+	box-shadow: var(--glass-note-shadow);
+	white-space: nowrap;
+	animation: k3r-note-in 0.5s var(--ease-spring-snappy) 0.15s backwards;
+}
+
+@keyframes k3r-note-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.k3r-note-number {
+	display: grid;
+	place-items: center;
+	width: 22px;
+	height: 22px;
+	border-radius: var(--radius-full);
+	background: var(--region-color, var(--color-blue));
+	color: #ffffff;
+	font-size: var(--text-badge);
+	font-weight: var(--font-medium);
+}
+
+.k3r-note-text {
+	color: #111111;
+	font-weight: var(--font-medium);
+}
+
+.k3r-note-badge {
+	color: var(--color-brand-blue);
+	font-size: var(--text-badge);
+	font-weight: var(--font-medium);
+	padding: 3px 7px;
+	background: rgba(37, 99, 235, 0.08);
+	border-radius: var(--radius-full);
+}
+
+/* --------------------------------------------------------------------------
+   5. Navigation Items & Floating Docks
+   -------------------------------------------------------------------------- */
+
+/* Fixed Top Header */
+.k3-top-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 88px;
+	padding: 0 clamp(20px, 3.5vw, 48px);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 50;
+	pointer-events: none;
+	transition: background-color var(--duration-normal) var(--ease-out);
+}
+
+.k3-header-nav {
+	pointer-events: auto;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+/* Floating Bottom Navigation Dock */
+.k3-floating-dock {
+	position: fixed;
+	bottom: clamp(20px, 4vh, 36px);
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px;
+	background: var(--glass-light-bg);
+	-webkit-backdrop-filter: var(--glass-light-blur);
+	backdrop-filter: var(--glass-light-blur);
+	border: 0.5px solid var(--glass-light-border);
+	border-radius: var(--radius-full);
+	box-shadow: var(--glass-light-shadow);
+	transition: background-color var(--duration-smooth) var(--ease-out),
+	            border-color var(--duration-smooth) var(--ease-out),
+	            box-shadow var(--duration-smooth) var(--ease-out);
+}
+
+.k3-floating-dock.in-dark {
+	background: var(--glass-dark-bg);
+	border-color: var(--glass-dark-border);
+	box-shadow: var(--glass-dark-shadow);
+}
+
+.k3-dock-tabs {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+
+.k3-dock-tab {
+	background: transparent;
+	border: none;
+	padding: 10px 18px;
+	font-family: inherit;
+	font-size: 14.5px;
+	font-weight: var(--font-medium);
+	color: #52525b;
+	border-radius: var(--radius-full);
+	cursor: pointer;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: color var(--duration-fast) var(--ease-out),
+	            background-color var(--duration-fast) var(--ease-out),
+	            transform var(--duration-fast) var(--ease-out);
+}
+
+.k3-dock-tab:hover {
+	color: #000000;
+}
+
+.k3-dock-tab.active {
+	background: #ffffff;
+	color: #000000;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.k3-floating-dock.in-dark .k3-dock-tab {
+	color: #a1a1aa;
+}
+
+.k3-floating-dock.in-dark .k3-dock-tab:hover {
+	color: #ffffff;
+}
+
+.k3-floating-dock.in-dark .k3-dock-tab.active {
+	background: rgba(255, 255, 255, 0.18);
+	color: #ffffff;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* Horizontal Subject Switcher Dock */
+.k3-subject-switcher {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px;
+	background: rgba(18, 18, 20, 0.72);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	backdrop-filter: blur(20px) saturate(180%);
+	border: 0.5px solid rgba(255, 255, 255, 0.14);
+	border-radius: var(--radius-full);
+	box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.7);
+}
+
+.k3-subject-btn {
+	background: transparent;
+	border: none;
+	color: rgba(255, 255, 255, 0.65);
+	padding: 8px 16px;
+	font-family: inherit;
+	font-size: var(--text-sm);
+	font-weight: var(--font-medium);
+	border-radius: var(--radius-full);
+	cursor: pointer;
+	transition: color 0.2s var(--ease-out), background-color 0.2s var(--ease-out);
+}
+
+.k3-subject-btn:hover {
+	color: #ffffff;
+}
+
+.k3-subject-btn.active {
+	color: #000000;
+	background-color: #ffffff;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   6. Curved Carousel Gallery (.k3-carousel)
+   -------------------------------------------------------------------------- */
+
+.k3-carousel {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	padding: 24px 0;
+}
+
+.k3-curve-stage {
+	display: flex;
+	gap: 20px;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	padding: 10px 20px;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	cursor: grab;
+	user-select: none;
+}
+
+.k3-curve-stage::-webkit-scrollbar {
+	display: none;
+}
+
+.k3-curve-stage:active {
+	cursor: grabbing;
+}
+
+.k3-case-slide {
+	flex: 0 0 auto;
+	width: min(480px, 85vw);
+	aspect-ratio: 16 / 10;
+	scroll-snap-align: center;
+	border-radius: var(--radius-2xl);
+	overflow: hidden;
+	position: relative;
+	box-shadow: var(--shadow-card);
+	transition: transform 0.3s var(--ease-out);
+}
+
+.k3-case-slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	pointer-events: none;
+}
+
+.k3-case-slide .slide-overlay {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: 20px;
+	color: #ffffff;
+}
+
+.k3-case-slide .slide-title {
+	font-size: 18px;
+	font-weight: var(--font-medium);
+	line-height: 1.2;
+}
+
+.k3-case-slide .slide-tag {
+	font-size: var(--text-badge);
+	color: rgba(255, 255, 255, 0.7);
+	margin-top: 4px;
+}
+
+/* Carousel Control Arrows */
+.k3-carousel-controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	margin-top: 20px;
+}
+
+.k3-carousel-arrow {
+	width: 44px;
+	height: 44px;
+	border-radius: var(--radius-full);
+	border: 1px solid var(--border-medium);
+	background: var(--bg-primary);
+	color: var(--text-primary);
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+	box-shadow: var(--shadow-subtle);
+	transition: background-color 0.2s, transform 0.15s;
+}
+
+.k3-carousel-arrow:hover {
+	background: var(--bg-secondary);
+}
+
+.k3-carousel-arrow:active {
+	transform: scale(0.95);
+}
+
+/* --------------------------------------------------------------------------
+   7. Before / After Split Comparison Slider (.k3-compare-slider)
+   -------------------------------------------------------------------------- */
+
+.k3-compare-slider {
+	position: relative;
+	width: 100%;
+	max-width: 900px;
+	aspect-ratio: 16 / 9;
+	margin: 0 auto;
+	border-radius: var(--radius-2xl);
+	overflow: hidden;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: none;
+	box-shadow: var(--shadow-floating);
+}
+
+.k3-compare-before,
+.k3-compare-after {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.k3-compare-before img,
+.k3-compare-after img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	pointer-events: none;
+}
+
+.k3-compare-before {
+	z-index: 2;
+	width: var(--split, 50%);
+	overflow: hidden;
+}
+
+.k3-compare-before img {
+	width: calc(100% * (100 / var(--split-num, 50)));
+	max-width: none;
+}
+
+/* Vertical Split Divider & Puck */
+.k3-compare-divider {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: var(--split, 50%);
+	width: 2px;
+	background: #ffffff;
+	z-index: 3;
+	transform: translateX(-50%);
+	pointer-events: none;
+	box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+.k3-compare-puck {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 36px;
+	height: 36px;
+	background: #ffffff;
+	border-radius: var(--radius-full);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+	display: grid;
+	place-items: center;
+	color: #000000;
+	pointer-events: auto;
+	cursor: ew-resize;
+	transition: transform 0.15s var(--ease-out);
+}
+
+.k3-compare-slider:hover .k3-compare-puck {
+	transform: translate(-50%, -50%) scale(1.08);
+}
+
+.k3-compare-badge {
+	position: absolute;
+	bottom: 16px;
+	z-index: 4;
+	padding: 6px 14px;
+	font-size: var(--text-sm);
+	font-weight: var(--font-medium);
+	color: #ffffff;
+	background: rgba(0, 0, 0, 0.6);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	border-radius: var(--radius-full);
+	pointer-events: none;
+}
+
+.k3-compare-badge.before { left: 16px; }
+.k3-compare-badge.after { right: 16px; }

@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Krea 3 — Official Design System & Component Library</title>
+	<meta name="description" content="Official, authentic Design System for Krea 3. 100% unminified tokens, typography, colors, animations, buttons, toggles, badges, and sliders." />
+
+	<!-- Favicons -->
+	<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32.png" />
+	<link rel="icon" type="image/png" sizes="192x192" href="./favicon/favicon-192.png" />
+
+	<!-- Official Suisse Intl Font Family -->
+	<link rel="preload" href="./fonts/SuisseIntl-Regular-WebM.woff2" as="font" type="font/woff2" crossorigin />
+	<link rel="preload" href="./fonts/SuisseIntl-Medium-WebM.woff2" as="font" type="font/woff2" crossorigin />
+	<link rel="preload" href="./fonts/SuisseIntl-SemiBold-WebM.woff2" as="font" type="font/woff2" crossorigin />
+	<link rel="preload" href="./fonts/SuisseIntl-Bold-WebM.woff2" as="font" type="font/woff2" crossorigin />
+	<link rel="stylesheet" href="./fonts/fonts.css" />
+
+	<!-- Design System Tokens & Components Stylesheets -->
+	<link rel="stylesheet" href="./css/tokens.css" />
+	<link rel="stylesheet" href="./css/components.css" />
+
+	<style>
+		/* Documentation Showcase Page Styles */
+		body {
+			background-color: var(--bg-primary);
+			color: var(--text-primary);
+			font-family: var(--font-display);
+			margin: 0;
+			padding: 0;
+			transition: background-color 0.3s ease, color 0.3s ease;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		.ds-header {
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			background: var(--bg-primary);
+			border-bottom: 1px solid var(--border-light);
+			padding: 16px clamp(20px, 4vw, 48px);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+
+		.ds-brand {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			text-decoration: none;
+			color: var(--text-primary);
+		}
+
+		.ds-badge {
+			font-size: var(--text-badge);
+			font-weight: var(--font-medium);
+			padding: 4px 10px;
+			background: var(--bg-secondary);
+			border: 1px solid var(--border-light);
+			border-radius: var(--radius-full);
+			color: var(--text-secondary);
+		}
+
+		.ds-header-actions {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.ds-theme-toggle {
+			height: 38px;
+			padding: 0 16px;
+			font-size: var(--text-sm);
+			font-weight: var(--font-medium);
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: var(--bg-secondary);
+			border: 1px solid var(--border-medium);
+			border-radius: var(--radius-full);
+			color: var(--text-primary);
+			cursor: pointer;
+			transition: background-color 0.2s;
+		}
+
+		.ds-theme-toggle:hover {
+			background: var(--bg-tertiary);
+		}
+
+		/* Subnav sticky links */
+		.ds-subnav {
+			position: sticky;
+			top: 71px;
+			z-index: 90;
+			background: var(--bg-primary);
+			border-bottom: 1px solid var(--border-light);
+			padding: 10px clamp(20px, 4vw, 48px);
+			display: flex;
+			gap: 8px;
+			overflow-x: auto;
+			scrollbar-width: none;
+			transition: background-color 0.3s ease;
+		}
+
+		.ds-subnav::-webkit-scrollbar { display: none; }
+
+		.ds-subnav a {
+			color: var(--text-secondary);
+			text-decoration: none;
+			font-size: 13.5px;
+			font-weight: var(--font-medium);
+			padding: 6px 14px;
+			border-radius: var(--radius-full);
+			white-space: nowrap;
+			transition: color 0.15s, background-color 0.15s;
+		}
+
+		.ds-subnav a:hover {
+			color: var(--text-primary);
+			background: var(--bg-secondary);
+		}
+
+		/* Main container */
+		.ds-container {
+			max-width: 1280px;
+			margin: 0 auto;
+			padding: 48px clamp(20px, 4vw, 48px) 120px;
+		}
+
+		.ds-section {
+			margin-bottom: 80px;
+			scroll-margin-top: 140px;
+		}
+
+		.ds-section-header {
+			margin-bottom: 32px;
+			border-bottom: 1px solid var(--border-light);
+			padding-bottom: 16px;
+		}
+
+		.ds-section-title {
+			font-size: 28px;
+			font-weight: var(--font-medium);
+			letter-spacing: -0.025em;
+			margin: 0 0 6px 0;
+		}
+
+		.ds-section-desc {
+			font-size: 15px;
+			color: var(--text-secondary);
+			margin: 0;
+			line-height: 1.5;
+		}
+
+		.ds-card {
+			background: var(--bg-secondary);
+			border: 1px solid var(--border-light);
+			border-radius: var(--radius-2xl);
+			padding: 32px;
+			margin-bottom: 24px;
+			transition: background-color 0.3s, border-color 0.3s;
+		}
+
+		.ds-card-title {
+			font-size: 14px;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			font-weight: var(--font-semibold);
+			color: var(--text-muted);
+			margin-bottom: 20px;
+		}
+
+		.ds-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 16px;
+		}
+
+		.ds-swatch {
+			border-radius: var(--radius-lg);
+			overflow: hidden;
+			border: 1px solid var(--border-light);
+			background: var(--bg-primary);
+		}
+
+		.ds-swatch-color {
+			height: 80px;
+			width: 100%;
+		}
+
+		.ds-swatch-info {
+			padding: 12px;
+			font-size: 13px;
+		}
+
+		.ds-swatch-name {
+			font-weight: var(--font-medium);
+			color: var(--text-primary);
+		}
+
+		.ds-swatch-val {
+			color: var(--text-secondary);
+			font-family: var(--font-mono);
+			font-size: 11.5px;
+			margin-top: 2px;
+		}
+
+		/* Typography showcase rows */
+		.ds-type-row {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+			padding: 20px 0;
+			border-bottom: 1px solid var(--border-light);
+		}
+
+		.ds-type-row:last-child { border-bottom: none; }
+
+		.ds-type-meta {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			font-family: var(--font-mono);
+			font-size: 12px;
+			color: var(--text-muted);
+		}
+
+		/* Icon showcase grid */
+		.ds-icon-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+			gap: 16px;
+		}
+
+		.ds-icon-card {
+			background: var(--bg-primary);
+			border: 1px solid var(--border-light);
+			border-radius: var(--radius-lg);
+			padding: 20px 12px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 12px;
+			text-align: center;
+			transition: transform 0.15s, border-color 0.2s;
+		}
+
+		.ds-icon-card:hover {
+			border-color: var(--color-brand-blue);
+			transform: translateY(-2px);
+		}
+
+		.ds-icon-name {
+			font-size: 12px;
+			font-family: var(--font-mono);
+			color: var(--text-secondary);
+		}
+
+		/* Buttons playground */
+		.ds-button-row {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 16px;
+			margin-bottom: 24px;
+		}
+
+		/* Preview canvas for notes & boxes */
+		.ds-preview-canvas {
+			position: relative;
+			width: 100%;
+			height: 380px;
+			background: #111111;
+			border-radius: var(--radius-2xl);
+			overflow: hidden;
+			background-image: url('./assets/s.krea.ai/k3-landing-final/hero-sardine-base.webp');
+			background-size: cover;
+			background-position: center;
+		}
+
+		.ds-preview-canvas::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.4);
+		}
+
+		/* Code block snippet */
+		.ds-code {
+			background: #18181b;
+			color: #e4e4e7;
+			padding: 16px 20px;
+			border-radius: var(--radius-lg);
+			font-family: var(--font-mono);
+			font-size: 13px;
+			line-height: 1.5;
+			overflow-x: auto;
+			margin-top: 16px;
+		}
+	</style>
+</head>
+<body>
+
+	<!-- Top Header -->
+	<header class="ds-header" aria-label="Design System Header">
+		<a href="./" class="ds-brand">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<path d="M8.34057 1.26646C10.1061 1.14218 11.6638 2.37142 11.8911 4.06824C12.1069 5.68015 11.0037 7.23915 9.34608 7.60419C8.93062 7.69566 8.46886 7.67023 8.02919 7.72601C6.95925 7.86191 6.04308 8.30843 5.2807 9.06558L5.27279 9.06966L5.26385 9.0689L5.2568 9.06354L5.25394 9.05533C5.25366 9.04931 5.25521 9.04398 5.25861 9.03933C5.26343 9.03249 5.26583 9.02497 5.26583 9.01677C5.25535 7.76661 5.2521 6.253 5.25606 4.47593C5.25946 2.79675 6.58613 1.38951 8.34057 1.26646Z" fill="currentColor"></path>
+				<path d="M8.5264 15.3045C6.27918 15.2869 4.66832 13.0758 5.44996 11.0041C5.88114 9.86055 6.9457 9.0267 8.20737 8.89545C8.59097 8.85566 9.05188 8.86591 9.42189 8.79701C11.322 8.44386 12.7897 6.99068 13.0867 5.14047C13.1525 4.7299 13.1181 4.24058 13.215 3.805C13.6636 1.78908 15.9736 0.657869 17.9137 1.56924C18.9252 2.04502 19.6032 2.94326 19.771 4.01623C19.8055 4.23634 19.8167 4.50896 19.8045 4.83408C19.5845 10.6755 14.5956 15.3529 8.5264 15.3045Z" fill="currentColor"></path>
+				<path d="M11.3567 16.2337C11.3465 16.229 11.3396 16.2222 11.3359 16.2132C11.3352 16.2114 11.3349 16.2094 11.335 16.2075C11.3351 16.2056 11.3356 16.2037 11.3366 16.202C11.3375 16.2003 11.3388 16.1988 11.3403 16.1976C11.3419 16.1964 11.3437 16.1956 11.3457 16.1951C13.6512 15.6674 15.6487 14.6058 17.338 13.0102C17.3683 12.9815 17.3959 12.9837 17.4208 13.0168C17.6918 13.3736 17.9748 13.7571 18.2016 14.1234C19.1336 15.6279 19.6617 17.2574 19.7857 19.0121C19.8106 19.3659 19.8184 19.6392 19.8091 19.832C19.7254 21.537 18.2985 22.9126 16.4998 22.9229C14.9072 22.9315 13.5071 21.845 13.2046 20.325C13.1333 19.9653 13.1553 19.4669 13.0946 19.0867C12.9071 17.9169 12.3355 16.9702 11.3797 16.2464C11.3754 16.2428 11.3678 16.2386 11.3567 16.2337Z" fill="currentColor"></path>
+				<path d="M7.98752 22.874C6.63495 22.6386 5.5466 21.5882 5.30446 20.2814C5.27132 20.1026 5.25476 19.8301 5.25476 19.464C5.25447 18.0227 5.25419 16.5813 5.25391 15.1397C5.25391 15.1255 5.25929 15.1232 5.27005 15.1327C6.15449 15.919 7.08397 16.3993 8.29806 16.4793C8.29919 16.4795 8.40794 16.4831 8.62431 16.4899C10.205 16.5404 11.544 17.5764 11.8528 19.0813C12.3099 21.3064 10.2955 23.2756 7.98752 22.874Z" fill="currentColor"></path>
+			</svg>
+			<strong style="font-size: 18px; font-weight: 600;">Krea 3</strong>
+			<span class="ds-badge">Design System v1.0</span>
+		</a>
+
+		<div class="ds-header-actions">
+			<a href="./" class="k3-btn k3-btn-outline k3-btn-sm">Back to Live Site</a>
+			<button type="button" class="ds-theme-toggle" id="theme-toggle" aria-label="Toggle light and dark mode">
+				<span id="theme-icon">🌙</span>
+				<span id="theme-label">Dark Mode</span>
+			</button>
+		</div>
+	</header>
+
+	<!-- Subnav Anchor Links -->
+	<nav class="ds-subnav" aria-label="Design System Sections">
+		<a href="#typography">Typography</a>
+		<a href="#colors">Color Palette</a>
+		<a href="#glassmorphism">Glassmorphism</a>
+		<a href="#buttons">Buttons</a>
+		<a href="#icons">Icons</a>
+		<a href="#toggles">Segmented Toggles</a>
+		<a href="#badges">Comment Badges & Pins</a>
+		<a href="#slider">Compare Slider</a>
+		<a href="#carousel">Curved Carousel</a>
+		<a href="#docks">Navigation Docks</a>
+	</nav>
+
+	<div class="ds-container">
+
+		<!-- SECTION 1: TYPOGRAPHY -->
+		<section class="ds-section" id="typography">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">1. Typography Matrix</h2>
+				<p class="ds-section-desc">Authentic Suisse Intl type family across regular, medium, semibold, bold, and monospaced styles.</p>
+			</div>
+
+			<div class="ds-card">
+				<div class="ds-card-title">Typographic Scale (Suisse Intl)</div>
+
+				<div class="ds-type-row">
+					<div class="ds-type-meta">
+						<span>--text-hero</span>
+						<span>clamp(2.5rem, 11.96vw, 10.75rem)</span>
+						<span>weight: 500</span>
+					</div>
+					<div style="font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1;">
+						4× Faster, 2× Cheaper
+					</div>
+				</div>
+
+				<div class="ds-type-row">
+					<div class="ds-type-meta">
+						<span>--text-h1</span>
+						<span>clamp(32px, 3.89vw, 56px)</span>
+						<span>weight: 500</span>
+					</div>
+					<div style="font-size: var(--text-h1); font-weight: 500; letter-spacing: var(--tracking-h1); line-height: var(--leading-none);">
+						Frontier Image Editing Model
+					</div>
+				</div>
+
+				<div class="ds-type-row">
+					<div class="ds-type-meta">
+						<span>--text-h2</span>
+						<span>clamp(28px, 3.2vw, 44px)</span>
+						<span>weight: 500</span>
+					</div>
+					<div style="font-size: var(--text-h2); font-weight: 500; letter-spacing: var(--tracking-h2); line-height: var(--leading-tight);">
+						Built for real-world studio production.
+					</div>
+				</div>
+
+				<div class="ds-type-row">
+					<div class="ds-type-meta">
+						<span>--text-lede</span>
+						<span>clamp(17px, 1.45vw, 21px)</span>
+						<span>weight: 500</span>
+					</div>
+					<div style="font-size: var(--text-lede); font-weight: 500; color: var(--text-secondary); line-height: var(--leading-normal);">
+						Krea 3 is an image editing model designed with localized generative inpainting.
+					</div>
+				</div>
+
+				<div class="ds-type-row">
+					<div class="ds-type-meta">
+						<span>--text-body</span>
+						<span>15px</span>
+						<span>weight: 400</span>
+					</div>
+					<div style="font-size: var(--text-body); font-weight: 400; line-height: var(--leading-normal);">
+						Accurate color reproduction, typography inpainting, and edge sharpness preservation without minification artifacts.
+					</div>
+				</div>
+
+				<div class="ds-type-row">
+					<div class="ds-type-meta">
+						<span>--font-mono</span>
+						<span>Suisse Intl Mono</span>
+						<span>13px</span>
+					</div>
+					<div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary);">
+						const krea3 = { speed: '4x', compute: '2x cheaper', latency: '<8s' };
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 2: COLOR PALETTE -->
+		<section class="ds-section" id="colors">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">2. Color Palette & Swatches</h2>
+				<p class="ds-section-desc">Monochromes, high-contrast brand blues, and semantic inpainting region accents.</p>
+			</div>
+
+			<!-- Brand Blues -->
+			<div class="ds-card">
+				<div class="ds-card-title">Brand Accents</div>
+				<div class="ds-grid">
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-brand-blue);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Brand Blue</div>
+							<div class="ds-swatch-val">#2563eb</div>
+						</div>
+					</div>
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-brand-blue-hover);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Brand Blue (Hover)</div>
+							<div class="ds-swatch-val">#1d4ed8</div>
+						</div>
+					</div>
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-blue-electric);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Electric Blue</div>
+							<div class="ds-swatch-val">#006eff</div>
+						</div>
+					</div>
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-canvas-dark);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Canvas Dark</div>
+							<div class="ds-swatch-val">#111111</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Inpainting Accents -->
+			<div class="ds-card">
+				<div class="ds-card-title">Inpainting Pin & Region Badges</div>
+				<div class="ds-grid">
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-pink);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Accent Pink (Region 1)</div>
+							<div class="ds-swatch-val">#ec4899</div>
+						</div>
+					</div>
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-blue);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Accent Blue (Region 2)</div>
+							<div class="ds-swatch-val">#2563eb</div>
+						</div>
+					</div>
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-green);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Accent Green (Region 3)</div>
+							<div class="ds-swatch-val">#10b981</div>
+						</div>
+					</div>
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-amber);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Accent Amber (Region 4)</div>
+							<div class="ds-swatch-val">#f59e0b</div>
+						</div>
+					</div>
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-purple);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Accent Purple (Region 5)</div>
+							<div class="ds-swatch-val">#8b5cf6</div>
+						</div>
+					</div>
+					<div class="ds-swatch">
+						<div class="ds-swatch-color" style="background-color: var(--color-cyan);"></div>
+						<div class="ds-swatch-info">
+							<div class="ds-swatch-name">Accent Cyan (Region 6)</div>
+							<div class="ds-swatch-val">#06b6d4</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 3: GLASSMORPHISM -->
+		<section class="ds-section" id="glassmorphism">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">3. Glassmorphic Elevation Tokens</h2>
+				<p class="ds-section-desc">Authentic backdrop blurs, optical saturation filters, and hairline translucent borders.</p>
+			</div>
+
+			<div class="ds-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+				<!-- Light Glass -->
+				<div style="background: var(--glass-light-bg); -webkit-backdrop-filter: var(--glass-light-blur); backdrop-filter: var(--glass-light-blur); border: 1px solid var(--glass-light-border); border-radius: var(--radius-2xl); padding: 24px; box-shadow: var(--glass-light-shadow);">
+					<div style="font-weight: 600; font-size: 16px; margin-bottom: 8px;">Light Frost Glass</div>
+					<div style="font-size: 13.5px; color: #52525b; line-height: 1.5;">Used on the bottom floating dock in light mode. Blur 24px with 180% saturation boost.</div>
+				</div>
+
+				<!-- Dark Glass -->
+				<div style="background: var(--glass-dark-bg); -webkit-backdrop-filter: var(--glass-dark-blur); backdrop-filter: var(--glass-dark-blur); border: 1px solid var(--glass-dark-border); border-radius: var(--radius-2xl); padding: 24px; box-shadow: var(--glass-dark-shadow); color: #ffffff;">
+					<div style="font-weight: 600; font-size: 16px; margin-bottom: 8px;">Dark Frost Glass</div>
+					<div style="font-size: 13.5px; color: #a1a1aa; line-height: 1.5;">Used on the hero subject switcher and dark dock. Blur 20px with 180% saturation.</div>
+				</div>
+
+				<!-- Prompt Note Glass -->
+				<div style="background: var(--glass-note-bg); -webkit-backdrop-filter: var(--glass-note-blur); backdrop-filter: var(--glass-note-blur); border: 1px solid var(--glass-note-border); border-radius: var(--radius-prompt-note); padding: 24px; box-shadow: var(--glass-note-shadow); color: #111111;">
+					<div style="font-weight: 600; font-size: 16px; margin-bottom: 8px;">Prompt Capsule Glass</div>
+					<div style="font-size: 13.5px; color: #52525b; line-height: 1.5;">Used on inpainting prompt notes. Blur 40px with 160% saturation and teardrop radius.</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 4: BUTTON SYSTEM -->
+		<section class="ds-section" id="buttons">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">4. Button System</h2>
+				<p class="ds-section-desc">Pill-shaped action buttons with spring micro-interactions (click to trigger <code>active-scale-95</code>).</p>
+			</div>
+
+			<div class="ds-card">
+				<div class="ds-card-title">Button Variants</div>
+				<div class="ds-button-row">
+					<button type="button" class="k3-btn k3-btn-brand k3-btn-lg">
+						Try Krea 3
+					</button>
+
+					<button type="button" class="k3-btn k3-btn-primary k3-btn-lg">
+						Contact sales
+					</button>
+
+					<button type="button" class="k3-btn k3-btn-outline k3-btn-lg">
+						Technical report
+					</button>
+
+					<button type="button" class="k3-btn k3-btn-secondary k3-btn-lg" style="background: rgba(0, 0, 0, 0.65);">
+						See what it can do
+					</button>
+
+					<button type="button" class="k3-btn k3-btn-chip">
+						<span>Hold to compare</span>
+					</button>
+				</div>
+
+				<div class="ds-card-title" style="margin-top: 32px;">Button Sizes</div>
+				<div class="ds-button-row">
+					<button type="button" class="k3-btn k3-btn-brand k3-btn-sm">Small (36px)</button>
+					<button type="button" class="k3-btn k3-btn-brand k3-btn-md">Medium (44px)</button>
+					<button type="button" class="k3-btn k3-btn-brand k3-btn-lg">Large (52px)</button>
+
+					<button type="button" class="k3-btn k3-btn-icon k3-btn-md k3-btn-outline" aria-label="Undo action">
+						<svg class="k3-icon size-4" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+					</button>
+
+					<button type="button" class="k3-btn k3-btn-icon k3-btn-md k3-btn-brand" aria-label="AI Sparkle">
+						<svg class="k3-icon size-4" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.05 6.136a1 1 0 0 0 .817.817l6.136 1.05a1 1 0 0 1 0 1.966l-6.136 1.05a1 1 0 0 0-.817.817l-1.05 6.136a1 1 0 0 1-1.966 0l-1.05-6.136a1 1 0 0 0-.817-.817l-6.136-1.05a1 1 0 0 1 0-1.966l6.136-1.05a1 1 0 0 0 .817-.817z"></path></svg>
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 5: SVG ICON SUITE -->
+		<section class="ds-section" id="icons">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">5. SVG Icon Suite</h2>
+				<p class="ds-section-desc">Handcrafted 24×24 vector line geometry (Feather/Lucide style, 100% stroke, zero image dependencies).</p>
+			</div>
+
+			<div class="ds-card">
+				<div class="ds-icon-grid">
+					<!-- Icon 1: Krea Brand -->
+					<div class="ds-icon-card">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M8.34057 1.26646C10.1061 1.14218 11.6638 2.37142 11.8911 4.06824C12.1069 5.68015 11.0037 7.23915 9.34608 7.60419C8.93062 7.69566 8.46886 7.67023 8.02919 7.72601C6.95925 7.86191 6.04308 8.30843 5.2807 9.06558L5.27279 9.06966L5.26385 9.0689L5.2568 9.06354L5.25394 9.05533C5.25366 9.04931 5.25521 9.04398 5.25861 9.03933C5.26343 9.03249 5.26583 9.02497 5.26583 9.01677C5.25535 7.76661 5.2521 6.253 5.25606 4.47593C5.25946 2.79675 6.58613 1.38951 8.34057 1.26646Z" fill="currentColor"></path>
+							<path d="M8.5264 15.3045C6.27918 15.2869 4.66832 13.0758 5.44996 11.0041C5.88114 9.86055 6.9457 9.0267 8.20737 8.89545C8.59097 8.85566 9.05188 8.86591 9.42189 8.79701C11.322 8.44386 12.7897 6.99068 13.0867 5.14047C13.1525 4.7299 13.1181 4.24058 13.215 3.805C13.6636 1.78908 15.9736 0.657869 17.9137 1.56924C18.9252 2.04502 19.6032 2.94326 19.771 4.01623C19.8055 4.23634 19.8167 4.50896 19.8045 4.83408C19.5845 10.6755 14.5956 15.3529 8.5264 15.3045Z" fill="currentColor"></path>
+							<path d="M11.3567 16.2337C11.3465 16.229 11.3396 16.2222 11.3359 16.2132C11.3352 16.2114 11.3349 16.2094 11.335 16.2075C11.3351 16.2056 11.3356 16.2037 11.3366 16.202C11.3375 16.2003 11.3388 16.1988 11.3403 16.1976C11.3419 16.1964 11.3437 16.1956 11.3457 16.1951C13.6512 15.6674 15.6487 14.6058 17.338 13.0102C17.3683 12.9815 17.3959 12.9837 17.4208 13.0168C17.6918 13.3736 17.9748 13.7571 18.2016 14.1234C19.1336 15.6279 19.6617 17.2574 19.7857 19.0121C19.8106 19.3659 19.8184 19.6392 19.8091 19.832C19.7254 21.537 18.2985 22.9126 16.4998 22.9229C14.9072 22.9315 13.5071 21.845 13.2046 20.325C13.1333 19.9653 13.1553 19.4669 13.0946 19.0867C12.9071 17.9169 12.3355 16.9702 11.3797 16.2464C11.3754 16.2428 11.3678 16.2386 11.3567 16.2337Z" fill="currentColor"></path>
+							<path d="M7.98752 22.874C6.63495 22.6386 5.5466 21.5882 5.30446 20.2814C5.27132 20.1026 5.25476 19.8301 5.25476 19.464C5.25447 18.0227 5.25419 16.5813 5.25391 15.1397C5.25391 15.1255 5.25929 15.1232 5.27005 15.1327C6.15449 15.919 7.08397 16.3993 8.29806 16.4793C8.29919 16.4795 8.40794 16.4831 8.62431 16.4899C10.205 16.5404 11.544 17.5764 11.8528 19.0813C12.3099 21.3064 10.2955 23.2756 7.98752 22.874Z" fill="currentColor"></path>
+						</svg>
+						<span class="ds-icon-name">krea-brand</span>
+					</div>
+
+					<!-- Icon 2: Sparkle -->
+					<div class="ds-icon-card">
+						<svg class="k3-icon size-6" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.05 6.136a1 1 0 0 0 .817.817l6.136 1.05a1 1 0 0 1 0 1.966l-6.136 1.05a1 1 0 0 0-.817.817l-1.05 6.136a1 1 0 0 1-1.966 0l-1.05-6.136a1 1 0 0 0-.817-.817l-6.136-1.05a1 1 0 0 1 0-1.966l6.136-1.05a1 1 0 0 0 .817-.817z"></path></svg>
+						<span class="ds-icon-name">sparkle</span>
+					</div>
+
+					<!-- Icon 3: Image Plus -->
+					<div class="ds-icon-card">
+						<svg class="k3-icon size-6" viewBox="0 0 24 24"><path d="M16 5h6"></path><path d="M19 2v6"></path><path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5"></path><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+						<span class="ds-icon-name">image-plus</span>
+					</div>
+
+					<!-- Icon 4: Chevron Left -->
+					<div class="ds-icon-card">
+						<svg class="k3-icon size-6" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg>
+						<span class="ds-icon-name">chevron-left</span>
+					</div>
+
+					<!-- Icon 5: Chevron Right -->
+					<div class="ds-icon-card">
+						<svg class="k3-icon size-6" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg>
+						<span class="ds-icon-name">chevron-right</span>
+					</div>
+
+					<!-- Icon 6: Rotate CCW (Undo) -->
+					<div class="ds-icon-card">
+						<svg class="k3-icon size-6" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+						<span class="ds-icon-name">rotate-ccw</span>
+					</div>
+
+					<!-- Icon 7: Arrow Up Right -->
+					<div class="ds-icon-card">
+						<svg class="k3-icon size-6" viewBox="0 0 24 24"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+						<span class="ds-icon-name">arrow-up-right</span>
+					</div>
+
+					<!-- Icon 8: Close (X) -->
+					<div class="ds-icon-card">
+						<svg class="k3-icon size-6" viewBox="0 0 24 24"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+						<span class="ds-icon-name">close-x</span>
+					</div>
+
+					<!-- Icon 9: Check -->
+					<div class="ds-icon-card">
+						<svg class="k3-icon size-6" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg>
+						<span class="ds-icon-name">check</span>
+					</div>
+
+					<!-- Icon 10: Spinner -->
+					<div class="ds-icon-card">
+						<svg class="k3-icon size-6 k3-icon-spin" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+						<span class="ds-icon-name">loader-spin</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 6: SEGMENTED TOGGLES -->
+		<section class="ds-section" id="toggles">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">6. Segmented Toggles & Tabs</h2>
+				<p class="ds-section-desc">Radio group accessible segmented controls with spring-physics sliding white pill indicator.</p>
+			</div>
+
+			<div class="ds-card">
+				<div class="ds-card-title">2-Item Model Comparison Switcher</div>
+				<div class="k3-toggle-group" role="radiogroup" aria-label="Model comparison">
+					<span class="k3-toggle-pill" aria-hidden="true"></span>
+					<button type="button" role="radio" aria-checked="false" class="k3-toggle-btn" data-value="gpt2">
+						GPT Image 2
+					</button>
+					<button type="button" role="radio" aria-checked="true" class="k3-toggle-btn active" data-value="nbpro">
+						<span>🍌</span> Nano Banana Pro
+					</button>
+				</div>
+
+				<div class="ds-card-title" style="margin-top: 36px;">3-Item Industry Category Switcher</div>
+				<div class="k3-toggle-group" role="radiogroup" aria-label="Industry category">
+					<span class="k3-toggle-pill" aria-hidden="true"></span>
+					<button type="button" role="radio" aria-checked="true" class="k3-toggle-btn active" data-value="ecommerce">
+						E-commerce
+					</button>
+					<button type="button" role="radio" aria-checked="false" class="k3-toggle-btn" data-value="consumer">
+						Consumer
+					</button>
+					<button type="button" role="radio" aria-checked="false" class="k3-toggle-btn" data-value="marketing">
+						Marketing
+					</button>
+				</div>
+
+				<div class="ds-card-title" style="margin-top: 36px;">4-Item Subject Switcher (Hero Scene Dock)</div>
+				<nav class="k3-subject-switcher" aria-label="Hero Scene selector">
+					<button type="button" class="k3-subject-btn active">Sardines</button>
+					<button type="button" class="k3-subject-btn">Windcoat</button>
+					<button type="button" class="k3-subject-btn">Skate Crew</button>
+					<button type="button" class="k3-subject-btn">Billboard</button>
+				</nav>
+			</div>
+		</section>
+
+		<!-- SECTION 7: COMMENT BADGES, PINS & BOUNDING BOXES -->
+		<section class="ds-section" id="badges">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">7. Comment Badges, Pins & Bounding Boxes</h2>
+				<p class="ds-section-desc">Interactive inpainting prompts: teardrop number pins, frosted prompt notes, and corner-handle bounding boxes.</p>
+			</div>
+
+			<div class="ds-card">
+				<div class="ds-preview-canvas">
+					<!-- Bounding Box 1 (Lemon region) -->
+					<div class="k3r-box" style="left: 36%; top: 12%; width: 140px; height: 110px;">
+						<span class="k3r-label" style="--region-color: var(--color-blue);">1</span>
+						<span class="k3r-handle nw"></span>
+						<span class="k3r-handle ne"></span>
+						<span class="k3r-handle sw"></span>
+						<span class="k3r-handle se"></span>
+					</div>
+
+					<!-- Prompt Note 1 -->
+					<div class="k3r-note" style="left: 36%; top: 135px; --region-color: var(--color-blue);">
+						<span class="k3r-note-number">1</span>
+						<span class="k3r-note-text">Swap the lemon for a lime</span>
+						<span class="k3r-note-badge">✓ Under 8s</span>
+					</div>
+
+					<!-- Bounding Box 2 (Sardine Label region) -->
+					<div class="k3r-box k3r-sel" style="left: 32%; top: 52%; width: 220px; height: 120px;">
+						<span class="k3r-label" style="--region-color: var(--color-pink);">2</span>
+						<span class="k3r-handle nw"></span>
+						<span class="k3r-handle ne"></span>
+						<span class="k3r-handle sw"></span>
+						<span class="k3r-handle se"></span>
+					</div>
+
+					<!-- Prompt Note 2 -->
+					<div class="k3r-note" style="left: 32%; top: 62%; --region-color: var(--color-pink);">
+						<span class="k3r-note-number">2</span>
+						<span class="k3r-note-text">Make the label emerald green</span>
+						<span class="k3r-note-badge">✓ Under 8s</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 8: BEFORE/AFTER COMPARISON SLIDER -->
+		<section class="ds-section" id="slider">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">8. Before / After Comparison Slider</h2>
+				<p class="ds-section-desc">Touch & mouse interactive split-screen divider with custom circular drag puck and status badges.</p>
+			</div>
+
+			<div class="ds-card">
+				<div class="k3-compare-slider" style="--split: 50%;">
+					<!-- Before Image -->
+					<div class="k3-compare-before">
+						<img src="./assets/s.krea.ai/k3-landing-final/hero-sardine-base.webp" alt="Original Sardine still life" draggable="false" />
+					</div>
+
+					<!-- After Image -->
+					<div class="k3-compare-after">
+						<img src="./assets/s.krea.ai/k3-landing-final/hero-sardine-lime.webp" alt="Edited Sardine with Lime" draggable="false" />
+					</div>
+
+					<!-- Divider Line & Puck -->
+					<div class="k3-compare-divider">
+						<div class="k3-compare-puck" aria-label="Drag comparison divider">
+							<svg class="k3-icon size-4" viewBox="0 0 24 24"><path d="m9 18-6-6 6-6"></path><path d="m15 6 6 6-6 6"></path></svg>
+						</div>
+					</div>
+
+					<span class="k3-compare-badge before">Before (Original)</span>
+					<span class="k3-compare-badge after">After (Inpainted)</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 9: CURVED CAROUSEL GALLERY -->
+		<section class="ds-section" id="carousel">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">9. Curved Slide Gallery (Carousel)</h2>
+				<p class="ds-section-desc">Responsive horizontal scroll-snap gallery with grab-to-drag and arrow navigation controls.</p>
+			</div>
+
+			<div class="ds-card" style="padding: 16px;">
+				<div class="k3-carousel">
+					<div class="k3-curve-stage">
+						<!-- Slide 1 -->
+						<div class="k3-case-slide">
+							<img src="./assets/s.krea.ai/k3-stuff-landing/product-edit-output.webp" alt="Product Bundle" loading="lazy" />
+							<div class="slide-overlay">
+								<div class="slide-title">Coffee Starter-Kit Bundle</div>
+								<div class="slide-tag">E-commerce Inpainting</div>
+							</div>
+						</div>
+
+						<!-- Slide 2 -->
+						<div class="k3-case-slide">
+							<img src="./assets/s.krea.ai/k3-stuff-landing/use-cases-consumer-output.webp" alt="Consumer Portrait" loading="lazy" />
+							<div class="slide-overlay">
+								<div class="slide-title">Studio Fashion Editorial</div>
+								<div class="slide-tag">Consumer Creative</div>
+							</div>
+						</div>
+
+						<!-- Slide 3 -->
+						<div class="k3-case-slide">
+							<img src="./assets/s.krea.ai/k3-stuff-again/use-cases-marketing-output.webp" alt="Billboard Marketing" loading="lazy" />
+							<div class="slide-overlay">
+								<div class="slide-title">Roadside Billboard Re-Skin</div>
+								<div class="slide-tag">Marketing & Packaging</div>
+							</div>
+						</div>
+
+						<!-- Slide 4 -->
+						<div class="k3-case-slide">
+							<img src="./assets/s.krea.ai/k3-stuff-landing/use-cases-architecture-output.webp" alt="Architecture Output" loading="lazy" />
+							<div class="slide-overlay">
+								<div class="slide-title">Mid-Century Modern Interior</div>
+								<div class="slide-tag">Architecture & Staging</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="k3-carousel-controls">
+						<button type="button" class="k3-carousel-arrow" data-carousel-prev aria-label="Previous Slide">
+							<svg class="k3-icon size-5" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg>
+						</button>
+						<button type="button" class="k3-carousel-arrow" data-carousel-next aria-label="Next Slide">
+							<svg class="k3-icon size-5" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg>
+						</button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 10: NAVIGATION DOCKS -->
+		<section class="ds-section" id="docks">
+			<div class="ds-section-header">
+				<h2 class="ds-section-title">10. Navigation Docks & Floating Chrome</h2>
+				<p class="ds-section-desc">Floating pill dock specimen with light and dark mode glass adaptations.</p>
+			</div>
+
+			<div class="ds-card" style="display: flex; flex-direction: column; align-items: center; gap: 36px; padding: 48px 20px;">
+				<div>
+					<div class="ds-card-title" style="text-align: center;">Light Mode Floating Dock</div>
+					<nav class="k3-floating-dock" style="position: static; transform: none;">
+						<div class="k3-dock-tabs">
+							<a href="#performance" class="k3-dock-tab active">Performance</a>
+							<a href="#hero" class="k3-dock-tab">Hero Editor</a>
+							<a href="#capabilities" class="k3-dock-tab">Capabilities</a>
+							<a href="#benchmarks" class="k3-dock-tab">Benchmarks</a>
+						</div>
+						<a href="#try" class="k3-btn k3-btn-brand k3-btn-md">Try Krea 3</a>
+					</nav>
+				</div>
+
+				<div style="background: #111111; padding: 36px; border-radius: var(--radius-2xl); width: 100%; display: flex; flex-direction: column; align-items: center;">
+					<div class="ds-card-title" style="color: #a1a1aa; text-align: center;">Dark Mode Floating Dock</div>
+					<nav class="k3-floating-dock in-dark" style="position: static; transform: none;">
+						<div class="k3-dock-tabs">
+							<a href="#performance" class="k3-dock-tab">Performance</a>
+							<a href="#hero" class="k3-dock-tab active">Hero Editor</a>
+							<a href="#capabilities" class="k3-dock-tab">Capabilities</a>
+							<a href="#benchmarks" class="k3-dock-tab">Benchmarks</a>
+						</div>
+						<a href="#try" class="k3-btn k3-btn-brand k3-btn-md">Try Krea 3</a>
+					</nav>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Component Interactive Driver Script -->
+	<script src="./js/components.js"></script>
+
+	<!-- Theme Switcher Script for Playground -->
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const themeToggle = document.getElementById('theme-toggle');
+			const themeIcon = document.getElementById('theme-icon');
+			const themeLabel = document.getElementById('theme-label');
+			const htmlEl = document.documentElement;
+
+			themeToggle.addEventListener('click', () => {
+				const currentTheme = htmlEl.getAttribute('data-theme');
+				const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+				htmlEl.setAttribute('data-theme', newTheme);
+
+				if (newTheme === 'dark') {
+					themeIcon.textContent = '☀️';
+					themeLabel.textContent = 'Light Mode';
+				} else {
+					themeIcon.textContent = '🌙';
+					themeLabel.textContent = 'Dark Mode';
+				}
+			});
+		});
+	</script>
+
+</body>
+</html>
